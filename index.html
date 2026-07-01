@@ -1105,6 +1105,175 @@
 
     /* Arrow SVG inline */
     .arrow-icon { display: inline-flex; }
+
+    /* ===== FORMULAIRE DEMANDE ===== */
+    .credit-type-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) { .credit-type-grid { grid-template-columns: 1fr 1fr; } }
+
+    .credit-type-group {}
+    .credit-type-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .credit-type-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--white);
+      border: 1.5px solid rgba(0,0,0,0.06);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--navy-800);
+      transition: all 0.25s ease;
+    }
+    .credit-type-btn:hover {
+      border-color: var(--gold);
+      background: rgba(212,175,55,0.04);
+      transform: translateX(4px);
+      color: var(--navy-900);
+    }
+    .ct-icon { font-size: 1.25rem; width: 32px; text-align: center; flex-shrink: 0; }
+
+    .form-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 48px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.05);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (max-width: 640px) { .form-card { padding: 28px 20px; } }
+
+    .form-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--navy-600);
+      cursor: pointer;
+      margin-bottom: 28px;
+      transition: color 0.2s;
+    }
+    .form-back:hover { color: var(--navy-900); }
+
+    .form-selected-type {
+      display: inline-block;
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.25);
+      color: var(--gold-dark);
+      font-family: 'Sora', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+
+    .form-section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin: 32px 0 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(212,175,55,0.2);
+    }
+    .form-section-title:first-of-type { margin-top: 0; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (min-width: 640px) {
+      .form-row { grid-template-columns: repeat(3, 1fr); }
+      .form-row:has(.form-group--wide) { grid-template-columns: 1fr; }
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--navy-700);
+      font-family: 'Inter', sans-serif;
+    }
+    .req { color: var(--gold-dark); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px 16px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      color: var(--navy-900);
+      background: var(--off-white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      width: 100%;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.12);
+      background: var(--white);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 18px; padding-right: 40px; }
+
+    .form-consent {
+      margin: 24px 0;
+      padding: 20px;
+      background: var(--off-white);
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: var(--navy-600);
+      line-height: 1.6;
+    }
+    .checkbox-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      margin-top: 2px;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+
+    .specific-section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin: 32px 0 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(212,175,55,0.2);
+    }
   </style>
 </head>
 <body>
@@ -1662,15 +1831,216 @@
   </section>
 
   <!-- ===== CTA BANNER ===== -->
-  <section class="cta-banner" id="demande">
-    <div class="cta-banner-bg"></div>
-    <div class="cta-banner-wrapper">
-      <h2 class="cta-banner-title">Prêt à concrétiser vos projets ?</h2>
-      <p class="cta-banner-desc">Déposez votre demande dès aujourd'hui et obtenez une réponse de principe sous 24h. Zéro engagement, zéro papier, 100% en ligne.</p>
-      <a href="mailto:contact@sinba.com" class="btn-gold-large">
-        Faire une demande
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-      </a>
+  <!-- ===== DEMANDE DE CRÉDIT ===== -->
+  <section id="demande" style="padding:120px 0;background:var(--off-white);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Demande de Crédit</div>
+        <h2 class="section-title">Faites votre demande en ligne</h2>
+        <p class="section-body">Remplissez le formulaire ci-dessous. Nous analyserons votre dossier et vous répondrons sous 24h.</p>
+      </div>
+
+      <!-- Étape 1 : Choix du type de crédit -->
+      <div id="step1" class="form-step active-step">
+        <h3 style="font-family:'Sora',sans-serif;font-size:1.25rem;color:var(--navy-900);text-align:center;margin-bottom:32px;">Quel type de financement souhaitez-vous ?</h3>
+        <div class="credit-type-grid">
+          <!-- Particuliers -->
+          <div class="credit-type-group">
+            <div class="credit-type-label">Particuliers</div>
+            <div class="credit-type-btn" onclick="selectCredit('pret_personnel','Prêt personnel')">
+              <span class="ct-icon">👤</span><span>Prêt personnel</span>
+            </div>
+            <div class="credit-type-btn" onclick="selectCredit('mariage','Crédit mariage & événement')">
+              <span class="ct-icon">💍</span><span>Crédit mariage & événement</span>
+            </div>
+            <div class="credit-type-btn" onclick="selectCredit('medical','Crédit médical')">
+              <span class="ct-icon">🏥</span><span>Crédit médical</span>
+            </div>
+            <div class="credit-type-btn" onclick="selectCredit('rachat','Rachat de crédit')">
+              <span class="ct-icon">🔄</span><span>Rachat de crédit</span>
+            </div>
+            <div class="credit-type-btn" onclick="selectCredit('auto','Crédit auto')">
+              <span class="ct-icon">🚗</span><span>Crédit auto</span>
+            </div>
+            <div class="credit-type-btn" onclick="selectCredit('immobilier','Crédit immobilier & rénovation')">
+              <span class="ct-icon">🏠</span><span>Crédit immobilier & rénovation</span>
+            </div>
+          </div>
+          <!-- Entreprises -->
+          <div class="credit-type-group">
+            <div class="credit-type-label">Entreprises</div>
+            <div class="credit-type-btn" onclick="selectCredit('creation','Crédit de création d\'entreprise')">
+              <span class="ct-icon">💡</span><span>Crédit de création</span>
+            </div>
+            <div class="credit-type-btn" onclick="selectCredit('fonctionnement','Crédit de fonctionnement')">
+              <span class="ct-icon">📊</span><span>Crédit de fonctionnement</span>
+            </div>
+            <div class="credit-type-btn" onclick="selectCredit('equipement','Crédit équipement')">
+              <span class="ct-icon">🔧</span><span>Crédit équipement</span>
+            </div>
+            <div class="credit-type-btn" onclick="selectCredit('expansion','Crédit d\'expansion')">
+              <span class="ct-icon">📈</span><span>Crédit d'expansion</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Étape 2 : Formulaire dynamique -->
+      <div id="step2" class="form-step" style="display:none;">
+        <div class="form-card">
+          <div class="form-back" onclick="goBack()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
+            Retour
+          </div>
+
+          <div class="form-selected-type" id="selectedTypeLabel"></div>
+
+          <form id="creditForm" action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST">
+            <input type="hidden" name="_subject" id="emailSubject" value="Nouvelle demande de crédit">
+            <input type="hidden" name="type_de_credit" id="hiddenCreditType">
+
+            <!-- Infos communes -->
+            <div class="form-section-title">Informations personnelles</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Civilité <span class="req">*</span></label>
+                <select name="civilite" required>
+                  <option value="">Sélectionner</option>
+                  <option>M.</option>
+                  <option>Mme</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Nom <span class="req">*</span></label>
+                <input type="text" name="nom" placeholder="Dupont" required>
+              </div>
+              <div class="form-group">
+                <label>Prénom <span class="req">*</span></label>
+                <input type="text" name="prenom" placeholder="Jean" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Date de naissance <span class="req">*</span></label>
+                <input type="date" name="date_naissance" required>
+              </div>
+              <div class="form-group">
+                <label>Nationalité <span class="req">*</span></label>
+                <input type="text" name="nationalite" placeholder="Française" required>
+              </div>
+              <div class="form-group">
+                <label>Pays de résidence <span class="req">*</span></label>
+                <input type="text" name="pays" placeholder="France" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group form-group--wide">
+                <label>Adresse complète <span class="req">*</span></label>
+                <input type="text" name="adresse" placeholder="12 rue de la Paix, 75002 Paris" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Email <span class="req">*</span></label>
+                <input type="email" name="email" placeholder="jean.dupont@email.com" required>
+              </div>
+              <div class="form-group">
+                <label>Téléphone <span class="req">*</span></label>
+                <input type="tel" name="telephone" placeholder="+33 6 12 34 56 78" required>
+              </div>
+            </div>
+
+            <!-- Situation financière commune -->
+            <div class="form-section-title">Situation financière</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Situation professionnelle <span class="req">*</span></label>
+                <select name="situation_pro" required>
+                  <option value="">Sélectionner</option>
+                  <option>Salarié(e) CDI</option>
+                  <option>Salarié(e) CDD</option>
+                  <option>Indépendant / Auto-entrepreneur</option>
+                  <option>Chef d'entreprise</option>
+                  <option>Retraité(e)</option>
+                  <option>Sans emploi</option>
+                  <option>Étudiant(e)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Revenus mensuels nets (€) <span class="req">*</span></label>
+                <input type="number" name="revenus_mensuels" placeholder="2500" min="200" required>
+              </div>
+            </div>
+
+            <!-- Champs spécifiques par type -->
+            <div id="specificFields"></div>
+
+            <!-- Infos crédit -->
+            <div class="form-section-title">Détails du financement</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Montant souhaité (€) <span class="req">*</span></label>
+                <input type="number" name="montant" placeholder="10000" min="500" required>
+              </div>
+              <div class="form-group">
+                <label>Durée souhaitée <span class="req">*</span></label>
+                <select name="duree" required>
+                  <option value="">Sélectionner</option>
+                  <option>6 mois</option>
+                  <option>12 mois</option>
+                  <option>24 mois</option>
+                  <option>36 mois</option>
+                  <option>48 mois</option>
+                  <option>60 mois</option>
+                  <option>84 mois</option>
+                  <option>120 mois</option>
+                  <option>180 mois</option>
+                  <option>240 mois</option>
+                  <option>360 mois</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Urgence</label>
+                <select name="urgence">
+                  <option value="">Sélectionner</option>
+                  <option>Dès que possible (48h)</option>
+                  <option>Dans la semaine</option>
+                  <option>Dans le mois</option>
+                  <option>Pas urgent</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group form-group--wide">
+                <label>Message complémentaire</label>
+                <textarea name="message" rows="4" placeholder="Décrivez votre projet, vos besoins ou toute information utile..."></textarea>
+              </div>
+            </div>
+
+            <!-- Consentement -->
+            <div class="form-consent">
+              <label class="checkbox-label">
+                <input type="checkbox" name="consentement" required>
+                <span>J'accepte que mes données soient traitées par SINBA dans le cadre de ma demande de crédit, conformément au <a href="#" style="color:var(--gold)">RGPD</a>. <span class="req">*</span></span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-gold-large" style="width:100%;justify-content:center;margin-top:8px;">
+              Envoyer ma demande
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Étape 3 : Confirmation -->
+      <div id="step3" class="form-step" style="display:none;text-align:center;padding:60px 0;">
+        <div style="width:80px;height:80px;background:rgba(212,175,55,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:2.5rem;">✅</div>
+        <h3 style="font-family:'Sora',sans-serif;font-size:1.75rem;color:var(--navy-900);margin-bottom:16px;">Demande envoyée avec succès !</h3>
+        <p style="color:var(--navy-600);font-size:1.0625rem;max-width:500px;margin:0 auto 36px;line-height:1.7;">Notre équipe analyse votre dossier et vous contactera dans les <strong>24 heures</strong> à l'adresse email fournie.</p>
+        <button onclick="resetForm()" class="btn-outline-gold">Faire une autre demande</button>
+      </div>
     </div>
   </section>
 
@@ -1784,6 +2154,509 @@
         document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
         if (!isActive) item.classList.add('active');
       });
+    });
+
+    // ===== FORMULAIRE DEMANDE =====
+    const specificFieldsMap = {
+      pret_personnel: `
+        <div class="specific-section-title">Détails du prêt personnel</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Objet du crédit <span class="req">*</span></label>
+            <select name="objet_credit" required>
+              <option value="">Sélectionner</option>
+              <option>Achat mobilier / électroménager</option>
+              <option>Travaux / Rénovation</option>
+              <option>Voyage / Vacances</option>
+              <option>Études / Formation</option>
+              <option>Dépenses imprévues</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Situation familiale <span class="req">*</span></label>
+            <select name="situation_familiale" required>
+              <option value="">Sélectionner</option>
+              <option>Célibataire</option>
+              <option>Marié(e) / Pacsé(e)</option>
+              <option>Divorcé(e)</option>
+              <option>Veuf/Veuve</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Nombre de personnes à charge</label>
+            <input type="number" name="personnes_charge" min="0" placeholder="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Avez-vous d'autres crédits en cours ?</label>
+            <select name="credits_en_cours">
+              <option value="">Sélectionner</option>
+              <option>Non</option>
+              <option>Oui, montant total ≤ 5 000 €</option>
+              <option>Oui, montant total entre 5 000 € et 20 000 €</option>
+              <option>Oui, montant total > 20 000 €</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Loyer mensuel ou remboursement immobilier (€)</label>
+            <input type="number" name="loyer_mensuel" placeholder="800">
+          </div>
+        </div>`,
+
+      mariage: `
+        <div class="specific-section-title">Détails du crédit mariage & événement</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type d'événement <span class="req">*</span></label>
+            <select name="type_evenement" required>
+              <option value="">Sélectionner</option>
+              <option>Mariage</option>
+              <option>Fiançailles</option>
+              <option>Anniversaire / Fête</option>
+              <option>Baptême / Communion</option>
+              <option>Autre événement</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Date prévue de l'événement</label>
+            <input type="date" name="date_evenement">
+          </div>
+          <div class="form-group">
+            <label>Nombre d'invités estimé</label>
+            <input type="number" name="nb_invites" placeholder="100">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Situation familiale <span class="req">*</span></label>
+            <select name="situation_familiale" required>
+              <option value="">Sélectionner</option>
+              <option>Célibataire</option>
+              <option>En couple</option>
+              <option>Pacsé(e)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Dépôt / Apport personnel (€)</label>
+            <input type="number" name="apport" placeholder="0">
+          </div>
+        </div>`,
+
+      medical: `
+        <div class="specific-section-title">Détails du crédit médical</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type de soins <span class="req">*</span></label>
+            <select name="type_soins" required>
+              <option value="">Sélectionner</option>
+              <option>Chirurgie</option>
+              <option>Dentaire / Implants</option>
+              <option>Ophtalmologie</option>
+              <option>Médecine esthétique</option>
+              <option>Traitement longue durée</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Bénéficiaire des soins <span class="req">*</span></label>
+            <select name="beneficiaire" required>
+              <option value="">Sélectionner</option>
+              <option>Moi-même</option>
+              <option>Mon conjoint / conjointe</option>
+              <option>Mon enfant</option>
+              <option>Un parent</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Remboursement sécurité sociale prévu ?</label>
+            <select name="remboursement_ss">
+              <option value="">Sélectionner</option>
+              <option>Oui, partiellement</option>
+              <option>Non (soins non remboursés)</option>
+              <option>Je ne sais pas</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Nom de l'établissement de soins / médecin</label>
+            <input type="text" name="etablissement_soins" placeholder="Clinique Saint-Michel, Dr. Dupont...">
+          </div>
+        </div>`,
+
+      rachat: `
+        <div class="specific-section-title">Détails du rachat de crédit</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre de crédits à regrouper <span class="req">*</span></label>
+            <input type="number" name="nb_credits" min="1" placeholder="2" required>
+          </div>
+          <div class="form-group">
+            <label>Encours total à racheter (€) <span class="req">*</span></label>
+            <input type="number" name="encours_total" placeholder="15000" required>
+          </div>
+          <div class="form-group">
+            <label>Mensualités actuelles totales (€)</label>
+            <input type="number" name="mensualites_actuelles" placeholder="600">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Types de crédits à regrouper</label>
+            <select name="types_credits_regrouper">
+              <option value="">Sélectionner</option>
+              <option>Crédits à la consommation uniquement</option>
+              <option>Crédit immobilier + consommation</option>
+              <option>Crédits revolving</option>
+              <option>Mix de tous types</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Êtes-vous propriétaire ?</label>
+            <select name="proprietaire">
+              <option value="">Sélectionner</option>
+              <option>Oui, propriétaire</option>
+              <option>Non, locataire</option>
+              <option>Hébergé(e) à titre gratuit</option>
+            </select>
+          </div>
+        </div>`,
+
+      auto: `
+        <div class="specific-section-title">Détails du crédit auto</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type de véhicule <span class="req">*</span></label>
+            <select name="type_vehicule" required>
+              <option value="">Sélectionner</option>
+              <option>Voiture neuve</option>
+              <option>Voiture d'occasion</option>
+              <option>Moto / Scooter</option>
+              <option>Utilitaire</option>
+              <option>Véhicule électrique</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Marque / Modèle</label>
+            <input type="text" name="marque_modele" placeholder="Renault Clio, BMW Série 3...">
+          </div>
+          <div class="form-group">
+            <label>Année du véhicule</label>
+            <input type="number" name="annee_vehicule" placeholder="2022" min="1990" max="2025">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prix du véhicule (€) <span class="req">*</span></label>
+            <input type="number" name="prix_vehicule" placeholder="18000" required>
+          </div>
+          <div class="form-group">
+            <label>Apport personnel (€)</label>
+            <input type="number" name="apport" placeholder="2000">
+          </div>
+          <div class="form-group">
+            <label>Achat chez un professionnel ?</label>
+            <select name="achat_pro">
+              <option value="">Sélectionner</option>
+              <option>Oui, concessionnaire / garage</option>
+              <option>Non, particulier</option>
+            </select>
+          </div>
+        </div>`,
+
+      immobilier: `
+        <div class="specific-section-title">Détails du crédit immobilier & rénovation</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type de projet <span class="req">*</span></label>
+            <select name="type_projet_immo" required>
+              <option value="">Sélectionner</option>
+              <option>Achat résidence principale</option>
+              <option>Achat résidence secondaire</option>
+              <option>Investissement locatif</option>
+              <option>Construction</option>
+              <option>Rénovation / Travaux</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Type de bien <span class="req">*</span></label>
+            <select name="type_bien" required>
+              <option value="">Sélectionner</option>
+              <option>Appartement</option>
+              <option>Maison</option>
+              <option>Local commercial</option>
+              <option>Terrain</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Situation actuelle</label>
+            <select name="situation_actuelle_logement">
+              <option value="">Sélectionner</option>
+              <option>Locataire</option>
+              <option>Propriétaire sans crédit en cours</option>
+              <option>Propriétaire avec crédit en cours</option>
+              <option>Hébergé(e) à titre gratuit</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prix du bien / Budget travaux (€) <span class="req">*</span></label>
+            <input type="number" name="prix_bien" placeholder="180000" required>
+          </div>
+          <div class="form-group">
+            <label>Apport personnel (€)</label>
+            <input type="number" name="apport" placeholder="20000">
+          </div>
+          <div class="form-group">
+            <label>Compromis de vente signé ?</label>
+            <select name="compromis_signe">
+              <option value="">Sélectionner</option>
+              <option>Oui</option>
+              <option>Non, en cours</option>
+              <option>Non, je cherche encore</option>
+            </select>
+          </div>
+        </div>`,
+
+      creation: `
+        <div class="specific-section-title">Détails du crédit de création d'entreprise</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nom de l'entreprise <span class="req">*</span></label>
+            <input type="text" name="nom_entreprise" placeholder="Ma Société SAS" required>
+          </div>
+          <div class="form-group">
+            <label>Forme juridique <span class="req">*</span></label>
+            <select name="forme_juridique" required>
+              <option value="">Sélectionner</option>
+              <option>Auto-entrepreneur / EI</option>
+              <option>SARL / EURL</option>
+              <option>SAS / SASU</option>
+              <option>SA</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Secteur d'activité <span class="req">*</span></label>
+            <input type="text" name="secteur_activite" placeholder="Commerce, Services, BTP..." required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Entreprise existante ou à créer ?</label>
+            <select name="statut_entreprise">
+              <option value="">Sélectionner</option>
+              <option>À créer (projet)</option>
+              <option>Créée il y a moins de 2 ans</option>
+              <option>Existante depuis plus de 2 ans</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Apport personnel (€)</label>
+            <input type="number" name="apport" placeholder="5000">
+          </div>
+          <div class="form-group">
+            <label>Chiffre d'affaires prévisionnel (€/an)</label>
+            <input type="number" name="ca_previsionnel" placeholder="50000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Objet du financement</label>
+            <textarea name="objet_financement" rows="3" placeholder="Achat de matériel, local commercial, stock initial, fonds de roulement..."></textarea>
+          </div>
+        </div>`,
+
+      fonctionnement: `
+        <div class="specific-section-title">Détails du crédit de fonctionnement</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nom de l'entreprise <span class="req">*</span></label>
+            <input type="text" name="nom_entreprise" placeholder="Ma Société SAS" required>
+          </div>
+          <div class="form-group">
+            <label>Numéro SIRET / Immatriculation</label>
+            <input type="text" name="siret" placeholder="123 456 789 00012">
+          </div>
+          <div class="form-group">
+            <label>Secteur d'activité <span class="req">*</span></label>
+            <input type="text" name="secteur_activite" placeholder="Commerce, Services..." required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Chiffre d'affaires annuel (€) <span class="req">*</span></label>
+            <input type="number" name="ca_annuel" placeholder="120000" required>
+          </div>
+          <div class="form-group">
+            <label>Ancienneté de l'entreprise <span class="req">*</span></label>
+            <select name="anciennete" required>
+              <option value="">Sélectionner</option>
+              <option>Moins de 1 an</option>
+              <option>1 à 2 ans</option>
+              <option>2 à 5 ans</option>
+              <option>Plus de 5 ans</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Besoin de financement</label>
+            <select name="besoin_financement">
+              <option value="">Sélectionner</option>
+              <option>Trésorerie court terme</option>
+              <option>Paiement fournisseurs</option>
+              <option>Salaires / Charges</option>
+              <option>Stock</option>
+              <option>Autre</option>
+            </select>
+          </div>
+        </div>`,
+
+      equipement: `
+        <div class="specific-section-title">Détails du crédit équipement</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nom de l'entreprise <span class="req">*</span></label>
+            <input type="text" name="nom_entreprise" placeholder="Ma Société SAS" required>
+          </div>
+          <div class="form-group">
+            <label>Numéro SIRET / Immatriculation</label>
+            <input type="text" name="siret" placeholder="123 456 789 00012">
+          </div>
+          <div class="form-group">
+            <label>Type d'équipement <span class="req">*</span></label>
+            <select name="type_equipement" required>
+              <option value="">Sélectionner</option>
+              <option>Machines industrielles</option>
+              <option>Matériel informatique</option>
+              <option>Véhicules professionnels</option>
+              <option>Équipement médical</option>
+              <option>Matériel de chantier</option>
+              <option>Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Description de l'équipement <span class="req">*</span></label>
+            <input type="text" name="description_equipement" placeholder="Marque, modèle, usage prévu..." required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Équipement neuf ou d'occasion ?</label>
+            <select name="etat_equipement">
+              <option value="">Sélectionner</option>
+              <option>Neuf</option>
+              <option>Occasion</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Chiffre d'affaires annuel (€)</label>
+            <input type="number" name="ca_annuel" placeholder="80000">
+          </div>
+        </div>`,
+
+      expansion: `
+        <div class="specific-section-title">Détails du crédit d'expansion</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nom de l'entreprise <span class="req">*</span></label>
+            <input type="text" name="nom_entreprise" placeholder="Ma Société SAS" required>
+          </div>
+          <div class="form-group">
+            <label>Numéro SIRET / Immatriculation</label>
+            <input type="text" name="siret" placeholder="123 456 789 00012">
+          </div>
+          <div class="form-group">
+            <label>Ancienneté <span class="req">*</span></label>
+            <select name="anciennete" required>
+              <option value="">Sélectionner</option>
+              <option>2 à 5 ans</option>
+              <option>5 à 10 ans</option>
+              <option>Plus de 10 ans</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type d'expansion <span class="req">*</span></label>
+            <select name="type_expansion" required>
+              <option value="">Sélectionner</option>
+              <option>Ouverture d'un nouveau site</option>
+              <option>Extension des locaux actuels</option>
+              <option>Modernisation / Rénovation</option>
+              <option>Rachat de fonds de commerce</option>
+              <option>Internationalisation</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Chiffre d'affaires annuel (€) <span class="req">*</span></label>
+            <input type="number" name="ca_annuel" placeholder="250000" required>
+          </div>
+          <div class="form-group">
+            <label>Nombre d'employés</label>
+            <input type="number" name="nb_employes" placeholder="5">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Description du projet d'expansion</label>
+            <textarea name="description_expansion" rows="3" placeholder="Décrivez votre projet, les objectifs visés..."></textarea>
+          </div>
+        </div>`
+    };
+
+    function selectCredit(type, label) {
+      document.getElementById('step1').style.display = 'none';
+      document.getElementById('step2').style.display = 'block';
+      document.getElementById('hiddenCreditType').value = label;
+      document.getElementById('emailSubject').value = 'Nouvelle demande — ' + label;
+      document.getElementById('selectedTypeLabel').textContent = label;
+      document.getElementById('specificFields').innerHTML = specificFieldsMap[type] || '';
+      window.scrollTo({ top: document.getElementById('demande').offsetTop - 100, behavior: 'smooth' });
+    }
+
+    function goBack() {
+      document.getElementById('step2').style.display = 'none';
+      document.getElementById('step1').style.display = 'block';
+      document.getElementById('creditForm').reset();
+      window.scrollTo({ top: document.getElementById('demande').offsetTop - 100, behavior: 'smooth' });
+    }
+
+    function resetForm() {
+      document.getElementById('step3').style.display = 'none';
+      document.getElementById('step1').style.display = 'block';
+      document.getElementById('creditForm').reset();
+      window.scrollTo({ top: document.getElementById('demande').offsetTop - 100, behavior: 'smooth' });
+    }
+
+    // Formspree AJAX submit
+    document.getElementById('creditForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('button[type="submit"]');
+      btn.textContent = 'Envoi en cours...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(this.action, {
+          method: 'POST',
+          body: new FormData(this),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          document.getElementById('step2').style.display = 'none';
+          document.getElementById('step3').style.display = 'block';
+          window.scrollTo({ top: document.getElementById('demande').offsetTop - 100, behavior: 'smooth' });
+        } else {
+          btn.textContent = 'Erreur, réessayez';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Erreur réseau, réessayez';
+        btn.disabled = false;
+      }
     });
 
     // Scroll reveal
