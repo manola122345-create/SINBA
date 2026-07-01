@@ -2159,6 +2159,906 @@
     // ===== FORMULAIRE DEMANDE =====
     const specificFieldsMap = {
       pret_personnel: `
+        <div class="specific-section-title">Situation professionnelle</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Profession <span class="req">*</span></label>
+            <input type="text" name="profession" placeholder="Ingénieur, Comptable..." required>
+          </div>
+          <div class="form-group">
+            <label>Employeur <span class="req">*</span></label>
+            <input type="text" name="employeur" placeholder="Nom de l'entreprise" required>
+          </div>
+          <div class="form-group">
+            <label>Type de contrat <span class="req">*</span></label>
+            <select name="type_contrat" required>
+              <option value="">Sélectionner</option>
+              <option>CDI</option><option>CDD</option><option>Indépendant / Auto-entrepreneur</option>
+              <option>Retraité(e)</option><option>Sans emploi</option><option>Étudiant(e)</option>
+            </select>
+          </div>
+        </div>
+        <div class="specific-section-title">Situation financière</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Revenus mensuels nets (€) <span class="req">*</span></label>
+            <input type="number" name="revenus_mensuels" placeholder="2500" required>
+          </div>
+          <div class="form-group">
+            <label>Charges fixes mensuelles (€)</label>
+            <input type="number" name="charges_fixes" placeholder="800">
+          </div>
+          <div class="form-group">
+            <label>Crédits en cours ?</label>
+            <select name="credits_en_cours">
+              <option value="">Sélectionner</option>
+              <option>Non</option><option>Oui, ≤ 5 000 €</option>
+              <option>Oui, entre 5 000 € et 20 000 €</option><option>Oui, > 20 000 €</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Situation familiale <span class="req">*</span></label>
+            <select name="situation_familiale" required>
+              <option value="">Sélectionner</option>
+              <option>Célibataire</option><option>Marié(e) / Pacsé(e)</option>
+              <option>Divorcé(e)</option><option>Veuf/Veuve</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Personnes à charge</label>
+            <input type="number" name="personnes_charge" min="0" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Mensualité souhaitée (€)</label>
+            <input type="number" name="mensualite_souhaitee" placeholder="300">
+          </div>
+        </div>
+        <div class="specific-section-title">Objet du prêt</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Objet du crédit <span class="req">*</span></label>
+            <select name="objet_credit" required>
+              <option value="">Sélectionner</option>
+              <option>Achat mobilier / électroménager</option><option>Travaux / Rénovation</option>
+              <option>Voyage / Vacances</option><option>Études / Formation</option>
+              <option>Dépenses imprévues</option><option>Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="specific-section-title">Documents à joindre</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Fiches de paie (3 derniers mois) · Relevés bancaires (3 derniers mois) · Justificatif de domicile · Pièce d'identité</label>
+          </div>
+        </div>`,
+
+      mariage: `
+        <div class="specific-section-title">Situation professionnelle</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Profession <span class="req">*</span></label>
+            <input type="text" name="profession" placeholder="Ingénieur, Comptable..." required>
+          </div>
+          <div class="form-group">
+            <label>Type de contrat <span class="req">*</span></label>
+            <select name="type_contrat" required>
+              <option value="">Sélectionner</option>
+              <option>CDI</option><option>CDD</option><option>Indépendant / Auto-entrepreneur</option>
+              <option>Retraité(e)</option><option>Sans emploi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Revenus mensuels nets (€) <span class="req">*</span></label>
+            <input type="number" name="revenus_mensuels" placeholder="2500" required>
+          </div>
+        </div>
+        <div class="specific-section-title">Informations sur le mariage</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Situation familiale <span class="req">*</span></label>
+            <select name="situation_familiale" required>
+              <option value="">Sélectionner</option>
+              <option>Célibataire</option><option>En couple</option><option>Pacsé(e)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Date prévue du mariage</label>
+            <input type="date" name="date_mariage">
+          </div>
+          <div class="form-group">
+            <label>Nombre d'invités estimé</label>
+            <input type="number" name="nb_invites" placeholder="100">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Budget estimatif total (€) <span class="req">*</span></label>
+            <input type="number" name="budget_mariage" placeholder="15000" required>
+          </div>
+          <div class="form-group">
+            <label>Mensualité souhaitée (€)</label>
+            <input type="number" name="mensualite_souhaitee" placeholder="400">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Postes de dépenses prévus</label>
+            <textarea name="postes_depenses" rows="3" placeholder="Salle de réception, traiteur, décoration, photographe, robe, costume..."></textarea>
+          </div>
+        </div>
+        <div class="specific-section-title">Documents à joindre</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité · Fiches de paie (3 derniers mois) · Devis (salle, traiteur, décoration, etc.) · Justificatif de domicile</label>
+          </div>
+        </div>`,
+
+      medical: `
+        <div class="specific-section-title">Situation professionnelle</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Profession <span class="req">*</span></label>
+            <input type="text" name="profession" placeholder="Ingénieur, Comptable..." required>
+          </div>
+          <div class="form-group">
+            <label>Employeur <span class="req">*</span></label>
+            <input type="text" name="employeur" placeholder="Nom de l'entreprise" required>
+          </div>
+          <div class="form-group">
+            <label>Ancienneté professionnelle</label>
+            <select name="anciennete_pro">
+              <option value="">Sélectionner</option>
+              <option>Moins de 1 an</option><option>1 à 3 ans</option>
+              <option>3 à 5 ans</option><option>Plus de 5 ans</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type de contrat <span class="req">*</span></label>
+            <select name="type_contrat" required>
+              <option value="">Sélectionner</option>
+              <option>CDI</option><option>CDD</option><option>Indépendant / Auto-entrepreneur</option>
+              <option>Retraité(e)</option><option>Sans emploi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Revenus mensuels nets (€) <span class="req">*</span></label>
+            <input type="number" name="revenus_mensuels" placeholder="2500" required>
+          </div>
+        </div>
+        <div class="specific-section-title">Informations médicales</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type de soins <span class="req">*</span></label>
+            <select name="type_soins" required>
+              <option value="">Sélectionner</option>
+              <option>Chirurgie</option><option>Dentaire / Implants</option>
+              <option>Ophtalmologie</option><option>Médecine esthétique</option>
+              <option>Traitement longue durée</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Bénéficiaire des soins <span class="req">*</span></label>
+            <select name="beneficiaire" required>
+              <option value="">Sélectionner</option>
+              <option>Moi-même</option><option>Mon conjoint / conjointe</option>
+              <option>Mon enfant</option><option>Un parent</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Coût total estimé des soins (€) <span class="req">*</span></label>
+            <input type="number" name="cout_soins" placeholder="5000" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nature détaillée des soins</label>
+            <input type="text" name="nature_soins" placeholder="Ex : Pose de 4 implants dentaires, chirurgie du genou...">
+          </div>
+          <div class="form-group">
+            <label>Remboursement sécurité sociale ?</label>
+            <select name="remboursement_ss">
+              <option value="">Sélectionner</option>
+              <option>Oui, partiellement</option><option>Non (soins non remboursés)</option>
+              <option>Je ne sais pas</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mensualité souhaitée (€)</label>
+            <input type="number" name="mensualite_souhaitee" placeholder="200">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Établissement de soins / Médecin</label>
+            <input type="text" name="etablissement_soins" placeholder="Clinique Saint-Michel, Dr. Dupont...">
+          </div>
+        </div>
+        <div class="specific-section-title">Documents à joindre</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité · Devis médical ou facture · Fiches de paie (3 derniers mois) · Relevés bancaires · Justificatif de domicile</label>
+          </div>
+        </div>`,
+
+      rachat: `
+        <div class="specific-section-title">Situation professionnelle</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Profession <span class="req">*</span></label>
+            <input type="text" name="profession" placeholder="Ingénieur, Comptable..." required>
+          </div>
+          <div class="form-group">
+            <label>Employeur <span class="req">*</span></label>
+            <input type="text" name="employeur" placeholder="Nom de l'entreprise" required>
+          </div>
+          <div class="form-group">
+            <label>Ancienneté</label>
+            <select name="anciennete_pro">
+              <option value="">Sélectionner</option>
+              <option>Moins de 1 an</option><option>1 à 3 ans</option>
+              <option>3 à 5 ans</option><option>Plus de 5 ans</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type de contrat <span class="req">*</span></label>
+            <select name="type_contrat" required>
+              <option value="">Sélectionner</option>
+              <option>CDI</option><option>CDD</option><option>Indépendant</option><option>Retraité(e)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Revenus mensuels nets (€) <span class="req">*</span></label>
+            <input type="number" name="revenus_mensuels" placeholder="2500" required>
+          </div>
+          <div class="form-group">
+            <label>Situation familiale <span class="req">*</span></label>
+            <select name="situation_familiale" required>
+              <option value="">Sélectionner</option>
+              <option>Célibataire</option><option>Marié(e) / Pacsé(e)</option>
+              <option>Divorcé(e)</option><option>Veuf/Veuve</option>
+            </select>
+          </div>
+        </div>
+        <div class="specific-section-title">Dettes existantes à consolider</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre de crédits à regrouper <span class="req">*</span></label>
+            <input type="number" name="nb_credits" min="1" placeholder="2" required>
+          </div>
+          <div class="form-group">
+            <label>Encours total à racheter (€) <span class="req">*</span></label>
+            <input type="number" name="encours_total" placeholder="15000" required>
+          </div>
+          <div class="form-group">
+            <label>Mensualités actuelles totales (€)</label>
+            <input type="number" name="mensualites_actuelles" placeholder="600">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Types de dettes à regrouper</label>
+            <select name="types_dettes">
+              <option value="">Sélectionner</option>
+              <option>Prêt personnel uniquement</option><option>Crédit auto</option>
+              <option>Crédit immobilier + consommation</option><option>Dettes cartes bancaires</option>
+              <option>Découverts bancaires</option><option>Mix de tous types</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Retards de paiement ?</label>
+            <select name="retards_paiement">
+              <option value="">Sélectionner</option>
+              <option>Non, aucun</option><option>Oui, occasionnels</option>
+              <option>Oui, réguliers</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mensualité adaptée souhaitée (€)</label>
+            <input type="number" name="mensualite_souhaitee" placeholder="350">
+          </div>
+        </div>
+        <div class="specific-section-title">Situation financière globale</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Charges mensuelles totales (€)</label>
+            <input type="number" name="charges_mensuelles" placeholder="1200">
+          </div>
+          <div class="form-group">
+            <label>Êtes-vous propriétaire ?</label>
+            <select name="proprietaire">
+              <option value="">Sélectionner</option>
+              <option>Oui, propriétaire</option><option>Non, locataire</option>
+              <option>Hébergé(e) à titre gratuit</option>
+            </select>
+          </div>
+        </div>
+        <div class="specific-section-title">Documents à joindre</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité · Tableaux d'amortissement des crédits en cours · Fiches de paie · Relevés bancaires (3 derniers mois) · Justificatif de domicile</label>
+          </div>
+        </div>`,
+
+      auto: `
+        <div class="specific-section-title">Situation professionnelle</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Profession <span class="req">*</span></label>
+            <input type="text" name="profession" placeholder="Ingénieur, Comptable..." required>
+          </div>
+          <div class="form-group">
+            <label>Employeur <span class="req">*</span></label>
+            <input type="text" name="employeur" placeholder="Nom de l'entreprise" required>
+          </div>
+          <div class="form-group">
+            <label>Ancienneté</label>
+            <select name="anciennete_pro">
+              <option value="">Sélectionner</option>
+              <option>Moins de 1 an</option><option>1 à 3 ans</option>
+              <option>3 à 5 ans</option><option>Plus de 5 ans</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type de contrat <span class="req">*</span></label>
+            <select name="type_contrat" required>
+              <option value="">Sélectionner</option>
+              <option>CDI</option><option>CDD</option><option>Indépendant</option><option>Retraité(e)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Revenus mensuels nets (€) <span class="req">*</span></label>
+            <input type="number" name="revenus_mensuels" placeholder="2500" required>
+          </div>
+          <div class="form-group">
+            <label>Situation familiale</label>
+            <select name="situation_familiale">
+              <option value="">Sélectionner</option>
+              <option>Célibataire</option><option>Marié(e) / Pacsé(e)</option>
+              <option>Divorcé(e)</option><option>Veuf/Veuve</option>
+            </select>
+          </div>
+        </div>
+        <div class="specific-section-title">Informations sur le véhicule</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type de véhicule <span class="req">*</span></label>
+            <select name="type_vehicule" required>
+              <option value="">Sélectionner</option>
+              <option>Voiture neuve</option><option>Voiture d'occasion</option>
+              <option>Moto / Scooter</option><option>Utilitaire</option><option>Véhicule électrique</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Marque et modèle <span class="req">*</span></label>
+            <input type="text" name="marque_modele" placeholder="Renault Clio, BMW Série 3..." required>
+          </div>
+          <div class="form-group">
+            <label>Année du véhicule</label>
+            <input type="number" name="annee_vehicule" placeholder="2022" min="1990" max="2026">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prix du véhicule (€) <span class="req">*</span></label>
+            <input type="number" name="prix_vehicule" placeholder="18000" required>
+          </div>
+          <div class="form-group">
+            <label>Apport personnel (€)</label>
+            <input type="number" name="apport" placeholder="2000">
+          </div>
+          <div class="form-group">
+            <label>Achat chez un professionnel ?</label>
+            <select name="achat_pro">
+              <option value="">Sélectionner</option>
+              <option>Oui, concessionnaire / garage</option><option>Non, particulier</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Nom du vendeur / concessionnaire</label>
+            <input type="text" name="vendeur" placeholder="Renault Paris 15, Garage Martin...">
+          </div>
+        </div>
+        <div class="specific-section-title">Capacité de remboursement</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Charges mensuelles (€)</label>
+            <input type="number" name="charges_mensuelles" placeholder="900">
+          </div>
+          <div class="form-group">
+            <label>Crédits en cours ?</label>
+            <select name="credits_en_cours">
+              <option value="">Sélectionner</option>
+              <option>Non</option><option>Oui, ≤ 5 000 €</option>
+              <option>Oui, entre 5 000 € et 20 000 €</option><option>Oui, > 20 000 €</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mensualité souhaitée (€)</label>
+            <input type="number" name="mensualite_souhaitee" placeholder="350">
+          </div>
+        </div>
+        <div class="specific-section-title">Documents à joindre</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité · Devis ou facture pro forma du véhicule · Fiches de paie (3 derniers mois) · Relevés bancaires · Justificatif de domicile</label>
+          </div>
+        </div>`,
+
+      immobilier: `
+        <div class="specific-section-title">Situation professionnelle</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Profession <span class="req">*</span></label>
+            <input type="text" name="profession" placeholder="Ingénieur, Comptable..." required>
+          </div>
+          <div class="form-group">
+            <label>Employeur <span class="req">*</span></label>
+            <input type="text" name="employeur" placeholder="Nom de l'entreprise" required>
+          </div>
+          <div class="form-group">
+            <label>Ancienneté</label>
+            <select name="anciennete_pro">
+              <option value="">Sélectionner</option>
+              <option>Moins de 1 an</option><option>1 à 3 ans</option>
+              <option>3 à 5 ans</option><option>Plus de 5 ans</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type de contrat <span class="req">*</span></label>
+            <select name="type_contrat" required>
+              <option value="">Sélectionner</option>
+              <option>CDI</option><option>CDD</option><option>Indépendant</option><option>Retraité(e)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Revenus mensuels nets (€) <span class="req">*</span></label>
+            <input type="number" name="revenus_mensuels" placeholder="3000" required>
+          </div>
+          <div class="form-group">
+            <label>Situation familiale <span class="req">*</span></label>
+            <select name="situation_familiale" required>
+              <option value="">Sélectionner</option>
+              <option>Célibataire</option><option>Marié(e) / Pacsé(e)</option>
+              <option>Divorcé(e)</option><option>Veuf/Veuve</option>
+            </select>
+          </div>
+        </div>
+        <div class="specific-section-title">Informations sur le projet immobilier</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type de projet <span class="req">*</span></label>
+            <select name="type_projet_immo" required>
+              <option value="">Sélectionner</option>
+              <option>Achat résidence principale</option><option>Achat résidence secondaire</option>
+              <option>Investissement locatif</option><option>Construction</option>
+              <option>Rénovation / Travaux</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Type de bien <span class="req">*</span></label>
+            <select name="type_bien" required>
+              <option value="">Sélectionner</option>
+              <option>Appartement</option><option>Maison</option>
+              <option>Local commercial</option><option>Terrain</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Situation actuelle</label>
+            <select name="situation_logement">
+              <option value="">Sélectionner</option>
+              <option>Locataire</option><option>Propriétaire sans crédit</option>
+              <option>Propriétaire avec crédit</option><option>Hébergé(e) gratuitement</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Adresse du bien concerné</label>
+            <input type="text" name="adresse_bien" placeholder="12 rue des Fleurs, 75015 Paris">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prix d'achat du bien (€) <span class="req">*</span></label>
+            <input type="number" name="prix_bien" placeholder="180000" required>
+          </div>
+          <div class="form-group">
+            <label>Montant des travaux (€)</label>
+            <input type="number" name="montant_travaux" placeholder="30000">
+          </div>
+          <div class="form-group">
+            <label>Apport personnel (€)</label>
+            <input type="number" name="apport" placeholder="20000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Mensualité souhaitée (€)</label>
+            <input type="number" name="mensualite_souhaitee" placeholder="800">
+          </div>
+          <div class="form-group">
+            <label>Compromis de vente signé ?</label>
+            <select name="compromis_signe">
+              <option value="">Sélectionner</option>
+              <option>Oui</option><option>Non, en cours</option><option>Non, je cherche encore</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Permis / Plans disponibles ?</label>
+            <select name="permis_plans">
+              <option value="">Sélectionner</option>
+              <option>Oui</option><option>Non</option><option>En cours d'obtention</option>
+            </select>
+          </div>
+        </div>
+        <div class="specific-section-title">Documents à joindre</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité · Compromis de vente · Devis des travaux · Plans / Permis de construire (si applicable) · Fiches de paie · Relevés bancaires · Justificatif de domicile</label>
+          </div>
+        </div>`,
+
+      creation: `
+        <div class="specific-section-title">Informations sur l'entreprise</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nom de l'entreprise <span class="req">*</span></label>
+            <input type="text" name="nom_entreprise" placeholder="Ma Société SAS" required>
+          </div>
+          <div class="form-group">
+            <label>Statut juridique <span class="req">*</span></label>
+            <select name="statut_juridique" required>
+              <option value="">Sélectionner</option>
+              <option>Auto-entrepreneur / EI</option><option>SARL / EURL</option>
+              <option>SAS / SASU</option><option>SA</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Statut de l'entreprise</label>
+            <select name="statut_entreprise">
+              <option value="">Sélectionner</option>
+              <option>À créer (projet)</option><option>Créée il y a moins de 2 ans</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Secteur d'activité <span class="req">*</span></label>
+            <input type="text" name="secteur_activite" placeholder="Commerce, Services, BTP..." required>
+          </div>
+          <div class="form-group">
+            <label>Date de création (ou prévue)</label>
+            <input type="date" name="date_creation">
+          </div>
+          <div class="form-group">
+            <label>Adresse du siège social</label>
+            <input type="text" name="adresse_siege" placeholder="12 rue du Commerce, 75015 Paris">
+          </div>
+        </div>
+        <div class="specific-section-title">Informations sur le dirigeant</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Diplômes / Compétences liées au projet</label>
+            <input type="text" name="diplomes_competences" placeholder="BTS Commerce, 10 ans d'expérience en restauration...">
+          </div>
+          <div class="form-group">
+            <label>Apport personnel disponible (€)</label>
+            <input type="number" name="apport" placeholder="10000">
+          </div>
+        </div>
+        <div class="specific-section-title">Présentation du projet</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Description détaillée de l'activité <span class="req">*</span></label>
+            <textarea name="description_activite" rows="3" placeholder="Décrivez votre activité, vos produits ou services, vos clients ciblés..." required></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Stratégie commerciale & marketing</label>
+            <textarea name="strategie_commerciale" rows="2" placeholder="Canal de vente, publicité, partenaires, objectifs commerciaux..."></textarea>
+          </div>
+        </div>
+        <div class="specific-section-title">Données financières prévisionnelles</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Chiffre d'affaires prévisionnel (€/an)</label>
+            <input type="number" name="ca_previsionnel" placeholder="80000">
+          </div>
+          <div class="form-group">
+            <label>Besoin en fonds de roulement — BFR (€)</label>
+            <input type="number" name="bfr" placeholder="15000">
+          </div>
+        </div>
+        <div class="specific-section-title">Utilisation précise des fonds</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>À quoi seront utilisés les fonds ? <span class="req">*</span></label>
+            <textarea name="utilisation_fonds" rows="3" placeholder="Achat de matériel, local commercial, stock initial, recrutement, marketing, trésorerie de départ..." required></textarea>
+          </div>
+        </div>
+        <div class="specific-section-title">Documents à joindre</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité du dirigeant · CV · Statuts de l'entreprise · Plan de trésorerie · Plan de financement initial · Devis ou factures des investissements prévus · Relevés bancaires · Justificatif de domicile · Contrats ou lettres d'intention clients/fournisseurs (si disponibles)</label>
+          </div>
+        </div>`,
+
+      fonctionnement: `
+        <div class="specific-section-title">Informations sur l'entreprise</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nom de l'entreprise <span class="req">*</span></label>
+            <input type="text" name="nom_entreprise" placeholder="Ma Société SAS" required>
+          </div>
+          <div class="form-group">
+            <label>Forme juridique <span class="req">*</span></label>
+            <select name="forme_juridique" required>
+              <option value="">Sélectionner</option>
+              <option>Auto-entrepreneur / EI</option><option>SARL / EURL</option>
+              <option>SAS / SASU</option><option>SA</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Secteur d'activité <span class="req">*</span></label>
+            <input type="text" name="secteur_activite" placeholder="Commerce, Services..." required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Numéro SIRET / Immatriculation</label>
+            <input type="text" name="siret" placeholder="123 456 789 00012">
+          </div>
+          <div class="form-group">
+            <label>Date de création <span class="req">*</span></label>
+            <input type="date" name="date_creation" required>
+          </div>
+          <div class="form-group">
+            <label>Ancienneté de l'entreprise <span class="req">*</span></label>
+            <select name="anciennete" required>
+              <option value="">Sélectionner</option>
+              <option>Moins de 1 an</option><option>1 à 2 ans</option>
+              <option>2 à 5 ans</option><option>Plus de 5 ans</option>
+            </select>
+          </div>
+        </div>
+        <div class="specific-section-title">Situation financière de l'entreprise</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Chiffre d'affaires annuel (€) <span class="req">*</span></label>
+            <input type="number" name="ca_annuel" placeholder="120000" required>
+          </div>
+          <div class="form-group">
+            <label>Trésorerie actuelle (€)</label>
+            <input type="number" name="tresorerie" placeholder="5000">
+          </div>
+          <div class="form-group">
+            <label>Dettes en cours (€)</label>
+            <input type="number" name="dettes_en_cours" placeholder="10000">
+          </div>
+        </div>
+        <div class="specific-section-title">Besoin en fonds de roulement</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Raison du besoin de financement <span class="req">*</span></label>
+            <select name="raison_financement" required>
+              <option value="">Sélectionner</option>
+              <option>Trésorerie court terme</option><option>Paiement fournisseurs</option>
+              <option>Salaires / Charges sociales</option><option>Reconstitution de stock</option>
+              <option>Décalage de trésorerie</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group form-group--wide">
+            <label>Description précise du besoin</label>
+            <textarea name="description_besoin" rows="2" placeholder="Expliquez pourquoi votre entreprise a besoin de ce financement..."></textarea>
+          </div>
+        </div>
+        <div class="specific-section-title">Documents à joindre</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité du dirigeant · Statuts de l'entreprise · Bilans comptables (2 derniers exercices) · Relevés bancaires professionnels (3 derniers mois) · Historique des crédits en cours</label>
+          </div>
+        </div>`,
+
+      equipement: `
+        <div class="specific-section-title">Informations sur l'entreprise</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nom de l'entreprise <span class="req">*</span></label>
+            <input type="text" name="nom_entreprise" placeholder="Ma Société SAS" required>
+          </div>
+          <div class="form-group">
+            <label>Forme juridique <span class="req">*</span></label>
+            <select name="forme_juridique" required>
+              <option value="">Sélectionner</option>
+              <option>Auto-entrepreneur / EI</option><option>SARL / EURL</option>
+              <option>SAS / SASU</option><option>SA</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Activité exercée <span class="req">*</span></label>
+            <input type="text" name="secteur_activite" placeholder="BTP, Transport, Restauration..." required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Numéro SIRET</label>
+            <input type="text" name="siret" placeholder="123 456 789 00012">
+          </div>
+          <div class="form-group">
+            <label>Date de création</label>
+            <input type="date" name="date_creation">
+          </div>
+        </div>
+        <div class="specific-section-title">Situation financière</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Chiffre d'affaires annuel (€)</label>
+            <input type="number" name="ca_annuel" placeholder="80000">
+          </div>
+          <div class="form-group">
+            <label>Trésorerie actuelle (€)</label>
+            <input type="number" name="tresorerie" placeholder="5000">
+          </div>
+          <div class="form-group">
+            <label>Endettement actuel (€)</label>
+            <input type="number" name="endettement" placeholder="10000">
+          </div>
+        </div>
+        <div class="specific-section-title">Description de l'équipement</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type d'équipement <span class="req">*</span></label>
+            <select name="type_equipement" required>
+              <option value="">Sélectionner</option>
+              <option>Machines industrielles</option><option>Matériel informatique</option>
+              <option>Véhicules professionnels</option><option>Équipement médical</option>
+              <option>Matériel de chantier</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>État de l'équipement</label>
+            <select name="etat_equipement">
+              <option value="">Sélectionner</option>
+              <option>Neuf</option><option>Occasion</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Durée de vie estimée (années)</label>
+            <input type="number" name="duree_vie_equipement" placeholder="5">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Description & utilité pour l'entreprise <span class="req">*</span></label>
+            <textarea name="description_equipement" rows="3" placeholder="Marque, modèle, usage prévu, bénéfices attendus pour l'entreprise..." required></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Coût total du matériel (€) <span class="req">*</span></label>
+            <input type="number" name="cout_equipement" placeholder="25000" required>
+          </div>
+          <div class="form-group">
+            <label>Apport / Participation de l'entreprise (€)</label>
+            <input type="number" name="apport_entreprise" placeholder="5000">
+          </div>
+          <div class="form-group">
+            <label>Nom du fournisseur</label>
+            <input type="text" name="fournisseur" placeholder="Fournisseur SA, Leroy Merlin Pro...">
+          </div>
+        </div>
+        <div class="specific-section-title">Documents à joindre</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité du dirigeant · Statuts de l'entreprise · Devis du fournisseur · Relevés bancaires professionnels · Bilans comptables (entreprises existantes) · Business plan et prévisions financières (nouvelles entreprises)</label>
+          </div>
+        </div>`,
+
+      expansion: `
+        <div class="specific-section-title">Informations sur l'entreprise</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nom de l'entreprise <span class="req">*</span></label>
+            <input type="text" name="nom_entreprise" placeholder="Ma Société SAS" required>
+          </div>
+          <div class="form-group">
+            <label>Forme juridique <span class="req">*</span></label>
+            <select name="forme_juridique" required>
+              <option value="">Sélectionner</option>
+              <option>Auto-entrepreneur / EI</option><option>SARL / EURL</option>
+              <option>SAS / SASU</option><option>SA</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Activité principale <span class="req">*</span></label>
+            <input type="text" name="secteur_activite" placeholder="Commerce, Services, Industrie..." required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Numéro SIRET</label>
+            <input type="text" name="siret" placeholder="123 456 789 00012">
+          </div>
+          <div class="form-group">
+            <label>Date de création</label>
+            <input type="date" name="date_creation">
+          </div>
+          <div class="form-group">
+            <label>Ancienneté <span class="req">*</span></label>
+            <select name="anciennete" required>
+              <option value="">Sélectionner</option>
+              <option>2 à 5 ans</option><option>5 à 10 ans</option><option>Plus de 10 ans</option>
+            </select>
+          </div>
+        </div>
+        <div class="specific-section-title">Situation financière actuelle</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Chiffre d'affaires annuel (€) <span class="req">*</span></label>
+            <input type="number" name="ca_annuel" placeholder="250000" required>
+          </div>
+          <div class="form-group">
+            <label>Résultat net annuel (€)</label>
+            <input type="number" name="resultat_net" placeholder="30000">
+          </div>
+          <div class="form-group">
+            <label>Trésorerie disponible (€)</label>
+            <input type="number" name="tresorerie" placeholder="20000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Dettes & crédits en cours (€)</label>
+            <input type="number" name="dettes_en_cours" placeholder="40000">
+          </div>
+          <div class="form-group">
+            <label>Nombre d'employés</label>
+            <input type="number" name="nb_employes" placeholder="5">
+          </div>
+        </div>
+        <div class="specific-section-title">Projet d'extension</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type d'expansion <span class="req">*</span></label>
+            <select name="type_expansion" required>
+              <option value="">Sélectionner</option>
+              <option>Ouverture d'un nouveau site</option><option>Extension des locaux actuels</option>
+              <option>Modernisation / Rénovation</option><option>Rachat de fonds de commerce</option>
+              <option>Internationalisation</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Apport de l'entreprise (€)</label>
+            <input type="number" name="apport_entreprise" placeholder="20000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label>Description du projet & objectifs <span class="req">*</span></label>
+            <textarea name="description_expansion" rows="3" placeholder="Nature de l'extension, objectifs visés, bénéfices attendus pour l'entreprise..." required></textarea>
+          </div>
+        </div>
+        <div class="specific-section-title">Documents à joindre</div>
+        <div class="form-row">
+          <div class="form-group form-group--wide">
+            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité du dirigeant · Statuts de l'entreprise · Comptes de résultat (2 derniers exercices) · Bilans comptables · Relevés bancaires · Plan d'investissement détaillé · Devis ou estimations des coûts du projet</label>
+          </div>
+        </div>`
+    };
+      pret_personnel: `
         <div class="specific-section-title">Détails du prêt personnel</div>
         <div class="form-row">
           <div class="form-group">
