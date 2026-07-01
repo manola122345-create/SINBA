@@ -1103,6 +1103,20 @@
     .footer-legal a { font-size: 0.8125rem; color: rgba(255,255,255,0.3); transition: color 0.2s ease; }
     .footer-legal a:hover { color: rgba(255,255,255,0.6); }
 
+    .form-group input[type="file"] {
+      padding: 10px 12px;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      color: var(--navy-600);
+      background: var(--white);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .form-group input[type="file"]:hover { border-color: var(--gold); }
+    .form-group input[type="file"]:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(212,175,55,0.12); }
+
     /* Arrow SVG inline */
     .arrow-icon { display: inline-flex; }
 
@@ -1898,7 +1912,7 @@
 
           <div class="form-selected-type" id="selectedTypeLabel"></div>
 
-          <form id="creditForm" action="https://formspree.io/f/xzzpwkgq" method="POST">
+          <form id="creditForm" action="https://formspree.io/f/mbdvzbbk" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="_replyto" value="manola122345@gmail.com">
             <input type="hidden" name="_to" value="manola122345@gmail.com">
             <input type="hidden" name="_subject" id="emailSubject" value="Nouvelle demande de crédit">
@@ -2231,12 +2245,31 @@
               <option>Dépenses imprévues</option><option>Autre</option>
             </select>
           </div>
-        </div>
-        <div class="specific-section-title">Documents à joindre</div>
-        <div class="form-row">
-          <div class="form-group form-group--wide">
-            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Fiches de paie (3 derniers mois) · Relevés bancaires (3 derniers mois) · Justificatif de domicile · Pièce d'identité</label>
+                  <div class="form-group" id="autre_precision_wrap" style="display:none;">
+            <label>Précisez l\'objet <span class="req">*</span></label>
+            <input type="text" name="objet_autre_precision" placeholder="Décrivez votre besoin...">
           </div>
+</div>
+
+        <div class="specific-section-title">📎 Documents à joindre</div>
+        <p style="font-size:0.8125rem;color:var(--navy-500);margin-bottom:16px;">Formats acceptés : PDF, JPG, PNG, Word — Taille max : 5 Mo par fichier</p>
+        <div class="form-row" style="grid-template-columns: repeat(auto-fill, minmax(220px,1fr));">
+        <div class="form-group">
+          <label>Pièce d'identité</label>
+          <input type="file" name="doc_pièce_didentité" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Fiches de paie (3 derniers mois)</label>
+          <input type="file" name="doc_fiches_de_paie_3_derniers_mois" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Relevés bancaires (3 derniers mois)</label>
+          <input type="file" name="doc_relevés_bancaires_3_derniers_m" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Justificatif de domicile</label>
+          <input type="file" name="doc_justificatif_de_domicile" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
         </div>`,
 
       mariage: `
@@ -2293,11 +2326,26 @@
             <textarea name="postes_depenses" rows="3" placeholder="Salle de réception, traiteur, décoration, photographe, robe, costume..."></textarea>
           </div>
         </div>
-        <div class="specific-section-title">Documents à joindre</div>
-        <div class="form-row">
-          <div class="form-group form-group--wide">
-            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité · Fiches de paie (3 derniers mois) · Devis (salle, traiteur, décoration, etc.) · Justificatif de domicile</label>
-          </div>
+
+        <div class="specific-section-title">📎 Documents à joindre</div>
+        <p style="font-size:0.8125rem;color:var(--navy-500);margin-bottom:16px;">Formats acceptés : PDF, JPG, PNG, Word — Taille max : 5 Mo par fichier</p>
+        <div class="form-row" style="grid-template-columns: repeat(auto-fill, minmax(220px,1fr));">
+        <div class="form-group">
+          <label>Pièce d'identité</label>
+          <input type="file" name="doc_pièce_didentité" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Fiches de paie (3 derniers mois)</label>
+          <input type="file" name="doc_fiches_de_paie_3_derniers_mois" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Devis (salle, traiteur, décoration...)</label>
+          <input type="file" name="doc_devis_salle,_traiteur,_décorat" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Justificatif de domicile</label>
+          <input type="file" name="doc_justificatif_de_domicile" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
         </div>`,
 
       medical: `
@@ -2382,11 +2430,30 @@
             <input type="text" name="etablissement_soins" placeholder="Clinique Saint-Michel, Dr. Dupont...">
           </div>
         </div>
-        <div class="specific-section-title">Documents à joindre</div>
-        <div class="form-row">
-          <div class="form-group form-group--wide">
-            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité · Devis médical ou facture · Fiches de paie (3 derniers mois) · Relevés bancaires · Justificatif de domicile</label>
-          </div>
+
+        <div class="specific-section-title">📎 Documents à joindre</div>
+        <p style="font-size:0.8125rem;color:var(--navy-500);margin-bottom:16px;">Formats acceptés : PDF, JPG, PNG, Word — Taille max : 5 Mo par fichier</p>
+        <div class="form-row" style="grid-template-columns: repeat(auto-fill, minmax(220px,1fr));">
+        <div class="form-group">
+          <label>Pièce d'identité</label>
+          <input type="file" name="doc_pièce_didentité" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Devis médical ou facture</label>
+          <input type="file" name="doc_devis_médical_ou_facture" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Fiches de paie (3 derniers mois)</label>
+          <input type="file" name="doc_fiches_de_paie_3_derniers_mois" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Relevés bancaires</label>
+          <input type="file" name="doc_relevés_bancaires" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Justificatif de domicile</label>
+          <input type="file" name="doc_justificatif_de_domicile" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
         </div>`,
 
       rachat: `
@@ -2483,11 +2550,30 @@
             </select>
           </div>
         </div>
-        <div class="specific-section-title">Documents à joindre</div>
-        <div class="form-row">
-          <div class="form-group form-group--wide">
-            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité · Tableaux d'amortissement des crédits en cours · Fiches de paie · Relevés bancaires (3 derniers mois) · Justificatif de domicile</label>
-          </div>
+
+        <div class="specific-section-title">📎 Documents à joindre</div>
+        <p style="font-size:0.8125rem;color:var(--navy-500);margin-bottom:16px;">Formats acceptés : PDF, JPG, PNG, Word — Taille max : 5 Mo par fichier</p>
+        <div class="form-row" style="grid-template-columns: repeat(auto-fill, minmax(220px,1fr));">
+        <div class="form-group">
+          <label>Pièce d'identité</label>
+          <input type="file" name="doc_pièce_didentité" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Tableaux d'amortissement des crédits</label>
+          <input type="file" name="doc_tableaux_damortissement_des_cr" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Fiches de paie</label>
+          <input type="file" name="doc_fiches_de_paie" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Relevés bancaires (3 derniers mois)</label>
+          <input type="file" name="doc_relevés_bancaires_3_derniers_m" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Justificatif de domicile</label>
+          <input type="file" name="doc_justificatif_de_domicile" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
         </div>`,
 
       auto: `
@@ -2592,11 +2678,30 @@
             <input type="number" name="mensualite_souhaitee" placeholder="350">
           </div>
         </div>
-        <div class="specific-section-title">Documents à joindre</div>
-        <div class="form-row">
-          <div class="form-group form-group--wide">
-            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité · Devis ou facture pro forma du véhicule · Fiches de paie (3 derniers mois) · Relevés bancaires · Justificatif de domicile</label>
-          </div>
+
+        <div class="specific-section-title">📎 Documents à joindre</div>
+        <p style="font-size:0.8125rem;color:var(--navy-500);margin-bottom:16px;">Formats acceptés : PDF, JPG, PNG, Word — Taille max : 5 Mo par fichier</p>
+        <div class="form-row" style="grid-template-columns: repeat(auto-fill, minmax(220px,1fr));">
+        <div class="form-group">
+          <label>Pièce d'identité</label>
+          <input type="file" name="doc_pièce_didentité" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Devis ou facture pro forma du véhicule</label>
+          <input type="file" name="doc_devis_ou_facture_pro_forma_du_" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Fiches de paie (3 derniers mois)</label>
+          <input type="file" name="doc_fiches_de_paie_3_derniers_mois" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Relevés bancaires</label>
+          <input type="file" name="doc_relevés_bancaires" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Justificatif de domicile</label>
+          <input type="file" name="doc_justificatif_de_domicile" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
         </div>`,
 
       immobilier: `
@@ -2708,11 +2813,38 @@
             </select>
           </div>
         </div>
-        <div class="specific-section-title">Documents à joindre</div>
-        <div class="form-row">
-          <div class="form-group form-group--wide">
-            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité · Compromis de vente · Devis des travaux · Plans / Permis de construire (si applicable) · Fiches de paie · Relevés bancaires · Justificatif de domicile</label>
-          </div>
+
+        <div class="specific-section-title">📎 Documents à joindre</div>
+        <p style="font-size:0.8125rem;color:var(--navy-500);margin-bottom:16px;">Formats acceptés : PDF, JPG, PNG, Word — Taille max : 5 Mo par fichier</p>
+        <div class="form-row" style="grid-template-columns: repeat(auto-fill, minmax(220px,1fr));">
+        <div class="form-group">
+          <label>Pièce d'identité</label>
+          <input type="file" name="doc_pièce_didentité" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Compromis de vente</label>
+          <input type="file" name="doc_compromis_de_vente" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Devis des travaux</label>
+          <input type="file" name="doc_devis_des_travaux" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Plans / Permis de construire</label>
+          <input type="file" name="doc_plans__permis_de_construire" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Fiches de paie</label>
+          <input type="file" name="doc_fiches_de_paie" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Relevés bancaires</label>
+          <input type="file" name="doc_relevés_bancaires" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Justificatif de domicile</label>
+          <input type="file" name="doc_justificatif_de_domicile" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
         </div>`,
 
       creation: `
@@ -2794,11 +2926,42 @@
             <textarea name="utilisation_fonds" rows="3" placeholder="Achat de matériel, local commercial, stock initial, recrutement, marketing, trésorerie de départ..." required></textarea>
           </div>
         </div>
-        <div class="specific-section-title">Documents à joindre</div>
-        <div class="form-row">
-          <div class="form-group form-group--wide">
-            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité du dirigeant · CV · Statuts de l'entreprise · Plan de trésorerie · Plan de financement initial · Devis ou factures des investissements prévus · Relevés bancaires · Justificatif de domicile · Contrats ou lettres d'intention clients/fournisseurs (si disponibles)</label>
-          </div>
+
+        <div class="specific-section-title">📎 Documents à joindre</div>
+        <p style="font-size:0.8125rem;color:var(--navy-500);margin-bottom:16px;">Formats acceptés : PDF, JPG, PNG, Word — Taille max : 5 Mo par fichier</p>
+        <div class="form-row" style="grid-template-columns: repeat(auto-fill, minmax(220px,1fr));">
+        <div class="form-group">
+          <label>Pièce d'identité du dirigeant</label>
+          <input type="file" name="doc_pièce_didentité_du_dirigeant" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>CV du dirigeant</label>
+          <input type="file" name="doc_cv_du_dirigeant" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Statuts de l'entreprise</label>
+          <input type="file" name="doc_statuts_de_lentreprise" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Plan de trésorerie</label>
+          <input type="file" name="doc_plan_de_trésorerie" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Plan de financement initial</label>
+          <input type="file" name="doc_plan_de_financement_initial" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Devis ou factures investissements</label>
+          <input type="file" name="doc_devis_ou_factures_investisseme" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Relevés bancaires</label>
+          <input type="file" name="doc_relevés_bancaires" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Justificatif de domicile</label>
+          <input type="file" name="doc_justificatif_de_domicile" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
         </div>`,
 
       fonctionnement: `
@@ -2870,11 +3033,30 @@
             <textarea name="description_besoin" rows="2" placeholder="Expliquez pourquoi votre entreprise a besoin de ce financement..."></textarea>
           </div>
         </div>
-        <div class="specific-section-title">Documents à joindre</div>
-        <div class="form-row">
-          <div class="form-group form-group--wide">
-            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité du dirigeant · Statuts de l'entreprise · Bilans comptables (2 derniers exercices) · Relevés bancaires professionnels (3 derniers mois) · Historique des crédits en cours</label>
-          </div>
+
+        <div class="specific-section-title">📎 Documents à joindre</div>
+        <p style="font-size:0.8125rem;color:var(--navy-500);margin-bottom:16px;">Formats acceptés : PDF, JPG, PNG, Word — Taille max : 5 Mo par fichier</p>
+        <div class="form-row" style="grid-template-columns: repeat(auto-fill, minmax(220px,1fr));">
+        <div class="form-group">
+          <label>Pièce d'identité du dirigeant</label>
+          <input type="file" name="doc_pièce_didentité_du_dirigeant" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Statuts de l'entreprise</label>
+          <input type="file" name="doc_statuts_de_lentreprise" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Bilans comptables (2 derniers exercices)</label>
+          <input type="file" name="doc_bilans_comptables_2_derniers_e" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Relevés bancaires professionnels</label>
+          <input type="file" name="doc_relevés_bancaires_professionne" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Historique des crédits</label>
+          <input type="file" name="doc_historique_des_crédits" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
         </div>`,
 
       equipement: `
@@ -2965,11 +3147,30 @@
             <input type="text" name="fournisseur" placeholder="Fournisseur SA, Leroy Merlin Pro...">
           </div>
         </div>
-        <div class="specific-section-title">Documents à joindre</div>
-        <div class="form-row">
-          <div class="form-group form-group--wide">
-            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité du dirigeant · Statuts de l'entreprise · Devis du fournisseur · Relevés bancaires professionnels · Bilans comptables (entreprises existantes) · Business plan et prévisions financières (nouvelles entreprises)</label>
-          </div>
+
+        <div class="specific-section-title">📎 Documents à joindre</div>
+        <p style="font-size:0.8125rem;color:var(--navy-500);margin-bottom:16px;">Formats acceptés : PDF, JPG, PNG, Word — Taille max : 5 Mo par fichier</p>
+        <div class="form-row" style="grid-template-columns: repeat(auto-fill, minmax(220px,1fr));">
+        <div class="form-group">
+          <label>Pièce d'identité du dirigeant</label>
+          <input type="file" name="doc_pièce_didentité_du_dirigeant" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Statuts de l'entreprise</label>
+          <input type="file" name="doc_statuts_de_lentreprise" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Devis du fournisseur</label>
+          <input type="file" name="doc_devis_du_fournisseur" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Relevés bancaires professionnels</label>
+          <input type="file" name="doc_relevés_bancaires_professionne" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Bilans comptables</label>
+          <input type="file" name="doc_bilans_comptables" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
         </div>`,
 
       expansion: `
@@ -3056,11 +3257,34 @@
             <textarea name="description_expansion" rows="3" placeholder="Nature de l'extension, objectifs visés, bénéfices attendus pour l'entreprise..." required></textarea>
           </div>
         </div>
-        <div class="specific-section-title">Documents à joindre</div>
-        <div class="form-row">
-          <div class="form-group form-group--wide">
-            <label style="color:var(--navy-500);font-size:0.8125rem;">📎 Documents requis à envoyer par email après soumission : Pièce d'identité du dirigeant · Statuts de l'entreprise · Comptes de résultat (2 derniers exercices) · Bilans comptables · Relevés bancaires · Plan d'investissement détaillé · Devis ou estimations des coûts du projet</label>
-          </div>
+
+        <div class="specific-section-title">📎 Documents à joindre</div>
+        <p style="font-size:0.8125rem;color:var(--navy-500);margin-bottom:16px;">Formats acceptés : PDF, JPG, PNG, Word — Taille max : 5 Mo par fichier</p>
+        <div class="form-row" style="grid-template-columns: repeat(auto-fill, minmax(220px,1fr));">
+        <div class="form-group">
+          <label>Pièce d'identité du dirigeant</label>
+          <input type="file" name="doc_pièce_didentité_du_dirigeant" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Statuts de l'entreprise</label>
+          <input type="file" name="doc_statuts_de_lentreprise" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Comptes de résultat (2 derniers exercices)</label>
+          <input type="file" name="doc_comptes_de_résultat_2_derniers" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Bilans comptables</label>
+          <input type="file" name="doc_bilans_comptables" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Relevés bancaires</label>
+          <input type="file" name="doc_relevés_bancaires" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
+        <div class="form-group">
+          <label>Plan d'investissement détaillé</label>
+          <input type="file" name="doc_plan_dinvestissement_détaillé" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+        </div>
         </div>`
     };
 
@@ -3087,6 +3311,20 @@
       document.getElementById('creditForm').reset();
       window.scrollTo({ top: document.getElementById('demande').offsetTop - 100, behavior: 'smooth' });
     }
+
+
+    // Show/hide "Autre - précisez" field
+    document.addEventListener('change', function(e) {
+      if (e.target && e.target.name === 'objet_credit') {
+        const wrap = document.getElementById('autre_precision_wrap');
+        if (wrap) {
+          const show = e.target.value === 'Autre';
+          wrap.style.display = show ? 'block' : 'none';
+          const inp = wrap.querySelector('input');
+          if (inp) inp.required = show;
+        }
+      }
+    });
 
     // Formspree AJAX submit
     document.getElementById('creditForm').addEventListener('submit', async function(e) {
