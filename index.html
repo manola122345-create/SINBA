@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sinba — Crédit en ligne sécurisé et compétitif</title>
+  <title>SINBA — Crédit en ligne sécurisé et compétitif</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,16 +21,8 @@
       --white: #ffffff;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--white);
@@ -39,22 +31,9 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-
-    h1, h2, h3, h4 {
-      font-family: 'Sora', sans-serif;
-      font-weight: 600;
-      line-height: 1.2;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    h1, h2, h3, h4 { font-family: 'Sora', sans-serif; font-weight: 600; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
 
     .container {
       width: 100%;
@@ -62,48 +41,32 @@
       margin: 0 auto;
       padding: 0 24px;
     }
+    @media (min-width: 768px) { .container { padding: 0 32px; } }
+    @media (min-width: 1024px) { .container { padding: 0 48px; } }
 
-    @media (min-width: 768px) {
-      .container {
-        padding: 0 32px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .container {
-        padding: 0 48px;
-      }
-    }
-
-    /* Navbar */
+    /* ===== NAVBAR ===== */
     .navbar {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
       z-index: 1000;
       transition: all 0.4s ease;
       background: transparent;
     }
-
     .navbar.scrolled {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255,255,255,0.97);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.07);
     }
-
     .navbar-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 80px;
-      transition: height 0.3s ease;
     }
-
     .logo {
       font-family: 'Sora', sans-serif;
-      font-size: 1.75rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--white);
       letter-spacing: -0.5px;
@@ -112,61 +75,138 @@
       align-items: center;
       gap: 2px;
     }
+    .logo .dot { color: var(--gold); }
+    .navbar.scrolled .logo { color: var(--navy-900); }
 
-    .logo .dot {
-      color: var(--gold);
-    }
-
-    .navbar.scrolled .logo {
-      color: var(--navy-900);
-    }
-
+    /* Nav links with dropdowns */
     .nav-links {
       display: none;
-      gap: 36px;
+      gap: 8px;
+      align-items: center;
     }
+    @media (min-width: 1024px) { .nav-links { display: flex; } }
 
-    .nav-links a {
+    .nav-item {
+      position: relative;
+    }
+    .nav-item > a, .nav-item > .nav-btn {
       font-family: 'Inter', sans-serif;
       font-size: 0.875rem;
       font-weight: 500;
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255,255,255,0.85);
       transition: color 0.2s ease;
-      position: relative;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      white-space: nowrap;
     }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1.5px;
-      background: var(--gold);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--white);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .navbar.scrolled .nav-links a {
+    .navbar.scrolled .nav-item > a,
+    .navbar.scrolled .nav-item > .nav-btn {
       color: var(--navy-600);
     }
-
-    .navbar.scrolled .nav-links a:hover {
+    .nav-item > a:hover,
+    .nav-item > .nav-btn:hover {
+      color: var(--white);
+    }
+    .navbar.scrolled .nav-item > a:hover,
+    .navbar.scrolled .nav-item > .nav-btn:hover {
       color: var(--navy-900);
+    }
+    .nav-chevron {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.25s ease;
+      stroke: currentColor;
+    }
+    .nav-item:hover .nav-chevron { transform: rotate(180deg); }
+
+    /* Dropdown */
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.06);
+      min-width: 240px;
+      padding: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(8px);
+      transition: all 0.2s ease;
+    }
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(-50%) translateY(0);
+    }
+    .dropdown::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 12px;
+      background: var(--white);
+      border-top: 1px solid rgba(0,0,0,0.06);
+      border-left: 1px solid rgba(0,0,0,0.06);
+      transform: translateX(-50%) rotate(45deg);
+    }
+    .dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: var(--navy-700);
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+    .dropdown a:hover {
+      background: rgba(212,175,55,0.07);
+      color: var(--navy-900);
+      padding-left: 18px;
+    }
+    .dropdown a .dd-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(212,175,55,0.08);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .dropdown a .dd-icon svg { width: 16px; height: 16px; }
+    .dropdown-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy-500);
+      padding: 6px 14px 4px;
+      font-family: 'Inter', sans-serif;
+    }
+    .dropdown-divider {
+      height: 1px;
+      background: rgba(0,0,0,0.05);
+      margin: 6px 0;
     }
 
     .nav-cta {
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 12px 28px;
+      padding: 11px 24px;
       background-color: var(--gold);
       color: var(--navy-950);
       font-family: 'Sora', sans-serif;
@@ -178,24 +218,16 @@
       cursor: pointer;
       text-decoration: none;
       line-height: 1;
+      margin-left: 8px;
     }
-
     .nav-cta:hover {
       background-color: var(--gold-dark);
       transform: translateY(-1px);
-      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35);
+      box-shadow: 0 10px 25px rgba(212,175,55,0.35);
     }
+    @media (min-width: 1024px) { .nav-cta { display: flex; } }
 
-    @media (min-width: 1024px) {
-      .nav-links {
-        display: flex;
-      }
-
-      .nav-cta {
-        display: flex;
-      }
-    }
-
+    /* Mobile menu btn */
     .mobile-menu-btn {
       display: flex;
       flex-direction: column;
@@ -206,7 +238,6 @@
       padding: 4px;
       z-index: 1001;
     }
-
     .mobile-menu-btn .bar {
       display: block;
       width: 24px;
@@ -215,10 +246,7 @@
       transition: all 0.3s ease;
       border-radius: 1px;
     }
-
-    .navbar.scrolled .mobile-menu-btn .bar {
-      background-color: var(--navy-900);
-    }
+    .navbar.scrolled .mobile-menu-btn .bar { background-color: var(--navy-900); }
 
     /* Mobile Menu */
     .mobile-menu {
@@ -228,46 +256,62 @@
       z-index: 999;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 36px;
+      padding: 100px 32px 40px;
+      overflow-y: auto;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease;
     }
-
-    .mobile-menu.active {
-      opacity: 1;
-      pointer-events: all;
+    .mobile-menu.active { opacity: 1; pointer-events: all; }
+    .mobile-nav-item { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .mobile-nav-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      cursor: pointer;
     }
-
-    .mobile-menu a {
+    .mobile-nav-top > span {
       font-family: 'Sora', sans-serif;
-      font-size: 1.75rem;
+      font-size: 1.25rem;
       color: var(--white);
       font-weight: 500;
-      transition: color 0.2s ease;
     }
-
-    .mobile-menu a:hover {
-      color: var(--gold);
+    .mobile-nav-top svg { color: var(--gold); width: 20px; height: 20px; transition: transform 0.3s; }
+    .mobile-nav-item.open .mobile-nav-top svg { transform: rotate(180deg); }
+    .mobile-sub {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
     }
-
-    .mobile-menu .btn-primary {
-      margin-top: 16px;
+    .mobile-nav-item.open .mobile-sub { max-height: 600px; }
+    .mobile-sub a {
+      display: block;
+      padding: 10px 0 10px 16px;
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+      border-left: 2px solid rgba(212,175,55,0.2);
+      margin-left: 4px;
+      margin-bottom: 4px;
     }
-
+    .mobile-sub a:hover { color: var(--gold); }
+    .mobile-simple-link {
+      display: block;
+      padding: 18px 0;
+      font-family: 'Sora', sans-serif;
+      font-size: 1.25rem;
+      color: var(--white);
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .mobile-cta { margin-top: 32px; }
     @media (min-width: 1024px) {
-      .mobile-menu {
-        display: none !important;
-      }
-
-      .mobile-menu-btn {
-        display: none !important;
-      }
+      .mobile-menu { display: none !important; }
+      .mobile-menu-btn { display: none !important; }
     }
 
-    /* Buttons */
+    /* ===== BUTTONS ===== */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -283,45 +327,58 @@
       border: none;
       line-height: 1;
     }
-
     .btn-primary {
       background-color: var(--gold);
       color: var(--navy-950);
-      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+      box-shadow: 0 10px 30px rgba(212,175,55,0.25);
     }
-
     .btn-primary:hover {
       background-color: var(--gold-dark);
       transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.35);
+      box-shadow: 0 15px 40px rgba(212,175,55,0.35);
     }
-
     .btn-secondary {
       background-color: transparent;
       color: var(--white);
-      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      border: 1.5px solid rgba(255,255,255,0.35);
     }
-
     .btn-secondary:hover {
-      background-color: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.6);
+      background-color: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.6);
       transform: translateY(-2px);
     }
-
     .btn-dark {
       background-color: var(--navy-900);
       color: var(--white);
       padding: 16px 32px;
       display: inline-flex;
     }
-
     .btn-dark:hover {
       background-color: var(--navy-800);
       transform: translateY(-2px);
-      box-shadow: 0 15px 35px rgba(11, 17, 32, 0.25);
+      box-shadow: 0 15px 35px rgba(11,17,32,0.25);
+    }
+    .btn-outline-gold {
+      background: transparent;
+      color: var(--gold);
+      border: 1.5px solid var(--gold);
+      padding: 14px 28px;
+      display: inline-flex;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      border-radius: 6px;
+      gap: 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-outline-gold:hover {
+      background: var(--gold);
+      color: var(--navy-950);
+      transform: translateY(-2px);
     }
 
-    /* Hero */
+    /* ===== HERO ===== */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -331,33 +388,28 @@
       overflow: hidden;
       background: var(--navy-950);
     }
-
     .hero-bg {
       position: absolute;
       inset: 0;
       background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
       background-size: cover;
       background-position: center;
-      filter: brightness(0.4) saturate(0.8);
+      filter: brightness(0.35) saturate(0.8);
     }
-
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(2, 6, 23, 0.85) 0%, rgba(15, 23, 42, 0.6) 50%, rgba(2, 6, 23, 0.7) 100%);
+      background: linear-gradient(135deg, rgba(2,6,23,0.85) 0%, rgba(15,23,42,0.6) 50%, rgba(2,6,23,0.7) 100%);
     }
-
     .hero-grid-pattern {
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
       background-size: 60px 60px;
       mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
     }
-
     .hero-content {
       position: relative;
       z-index: 2;
@@ -367,33 +419,20 @@
       padding: 140px 24px 80px;
       text-align: center;
     }
-
     @media (min-width: 768px) {
-      .hero-content {
-        text-align: left;
-        padding: 160px 48px 100px;
-      }
+      .hero-content { text-align: left; padding: 160px 48px 100px; }
     }
-
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 8px 16px;
-      background: rgba(212, 175, 55, 0.1);
-      border: 1px solid rgba(212, 175, 55, 0.2);
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.2);
       border-radius: 100px;
       font-size: 0.8125rem;
       color: var(--gold-light);
@@ -402,16 +441,13 @@
       margin-bottom: 32px;
       animation: fadeUp 0.8s ease forwards;
     }
-
     .hero-badge::before {
       content: '';
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       background: var(--gold);
       border-radius: 50%;
-      box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+      box-shadow: 0 0 8px rgba(212,175,55,0.6);
     }
-
     .hero-title {
       font-size: clamp(2.5rem, 6vw, 5rem);
       color: var(--white);
@@ -423,21 +459,16 @@
       animation: fadeUp 0.8s 0.1s ease forwards;
       opacity: 0;
     }
-
-    .hero-title span {
-      color: var(--gold);
-    }
-
+    .hero-title span { color: var(--gold); }
     .hero-desc {
       font-size: clamp(1rem, 2vw, 1.25rem);
-      color: rgba(255, 255, 255, 0.65);
-      max-width: 560px;
+      color: rgba(255,255,255,0.65);
+      max-width: 580px;
       line-height: 1.75;
       margin-bottom: 48px;
       animation: fadeUp 0.8s 0.2s ease forwards;
       opacity: 0;
     }
-
     .hero-ctas {
       display: flex;
       flex-direction: column;
@@ -447,14 +478,9 @@
       animation: fadeUp 0.8s 0.3s ease forwards;
       opacity: 0;
     }
-
     @media (min-width: 640px) {
-      .hero-ctas {
-        flex-direction: row;
-        justify-content: flex-start;
-      }
+      .hero-ctas { flex-direction: row; justify-content: flex-start; }
     }
-
     .hero-trust {
       display: flex;
       flex-wrap: wrap;
@@ -462,35 +488,23 @@
       gap: 24px 32px;
       margin-top: 56px;
       padding-top: 32px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255,255,255,0.08);
       animation: fadeUp 0.8s 0.4s ease forwards;
       opacity: 0;
     }
-
-    @media (min-width: 768px) {
-      .hero-trust {
-        justify-content: flex-start;
-      }
-    }
-
+    @media (min-width: 768px) { .hero-trust { justify-content: flex-start; } }
     .trust-item {
       display: flex;
       align-items: center;
       gap: 10px;
       font-size: 0.8125rem;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255,255,255,0.5);
       font-family: 'Inter', sans-serif;
       font-weight: 500;
     }
+    .trust-item svg { width: 18px; height: 18px; color: var(--gold); opacity: 0.9; }
 
-    .trust-item svg {
-      width: 18px;
-      height: 18px;
-      color: var(--gold);
-      opacity: 0.9;
-    }
-
-    /* Section Headers */
+    /* ===== SECTION HEADERS ===== */
     .section-eyebrow {
       font-size: 0.75rem;
       font-weight: 700;
@@ -500,7 +514,6 @@
       margin-bottom: 16px;
       font-family: 'Inter', sans-serif;
     }
-
     .section-title {
       font-size: clamp(2rem, 4vw, 2.75rem);
       color: var(--navy-900);
@@ -508,180 +521,99 @@
       font-family: 'Sora', sans-serif;
       font-weight: 700;
     }
-
     .section-body {
       color: var(--navy-600);
       font-size: 1.0625rem;
       line-height: 1.7;
     }
-
     .section-header {
       text-align: center;
       max-width: 640px;
       margin: 0 auto 64px;
     }
 
-    /* Features */
+    /* ===== FEATURES ===== */
     .features {
       padding: 100px 0;
       background: linear-gradient(to bottom, var(--off-white), #ffffff);
-      position: relative;
     }
-
-    .features-header {
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto 64px;
-    }
-
     .features-grid {
       display: grid;
       gap: 24px;
       grid-template-columns: 1fr;
     }
-
-    @media (min-width: 768px) {
-      .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .features-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
+    @media (min-width: 768px) { .features-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(4,1fr); } }
     .feature-card {
       background: var(--white);
-      border: 1px solid rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0,0,0,0.04);
       border-radius: 16px;
-      padding: 40px;
-      transition: all 0.4s ease;
+      padding: 36px 32px;
+      transition: all 0.6s cubic-bezier(0.16,1,0.3,1);
       position: relative;
       overflow: hidden;
       opacity: 0;
       transform: translateY(24px);
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform, opacity;
     }
-
-    .feature-card.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    .feature-card.revealed { opacity: 1; transform: translateY(0); }
     .feature-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
       background: linear-gradient(to right, var(--gold), var(--gold-light));
       opacity: 0;
       transition: opacity 0.4s ease;
     }
-
-    .feature-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
-      border-color: rgba(212, 175, 55, 0.2);
-    }
-
-    .feature-card:hover::before {
-      opacity: 1;
-    }
-
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(0,0,0,0.08); border-color: rgba(212,175,55,0.2); }
+    .feature-card:hover::before { opacity: 1; }
     .feature-icon {
-      width: 56px;
-      height: 56px;
-      background: rgba(212, 175, 55, 0.08);
-      border-radius: 14px;
+      width: 52px; height: 52px;
+      background: rgba(212,175,55,0.08);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       color: var(--gold);
     }
+    .feature-icon svg { width: 22px; height: 22px; }
+    .feature-title { font-size: 1.125rem; color: var(--navy-900); margin-bottom: 10px; font-family: 'Sora', sans-serif; }
+    .feature-desc { font-size: 0.9rem; color: var(--navy-600); line-height: 1.7; }
 
-    .feature-icon svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .feature-title {
-      font-size: 1.25rem;
-      color: var(--navy-900);
-      margin-bottom: 12px;
-      font-family: 'Sora', sans-serif;
-    }
-
-    .feature-desc {
-      font-size: 0.9375rem;
-      color: var(--navy-600);
-      line-height: 1.75;
-    }
-
-    /* About */
+    /* ===== ABOUT ===== */
     .about {
       padding: 120px 0;
       background: var(--white);
-      position: relative;
       overflow: hidden;
     }
-
     .about-grid {
       display: grid;
       gap: 60px;
       align-items: center;
       grid-template-columns: 1fr;
     }
-
-    @media (min-width: 1024px) {
-      .about-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 80px;
-      }
-    }
-
+    @media (min-width: 1024px) { .about-grid { grid-template-columns: 1fr 1fr; gap: 80px; } }
     .about-image-wrap {
       position: relative;
       border-radius: 16px;
       overflow: hidden;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 4/3;
     }
-
-    .about-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-
-    .about-image-wrap:hover img {
-      transform: scale(1.03);
-    }
-
+    @media (min-width: 1024px) { .about-image-wrap { aspect-ratio: 3/4; } }
+    .about-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .about-image-wrap:hover img { transform: scale(1.03); }
     .about-image-accent {
       position: absolute;
-      top: -24px;
-      left: -24px;
-      width: calc(100% + 48px);
-      height: calc(100% + 48px);
+      top: -24px; left: -24px;
+      width: calc(100% + 48px); height: calc(100% + 48px);
       border: 2px solid var(--gold);
       border-radius: 16px;
       z-index: -1;
       opacity: 0.35;
       pointer-events: none;
     }
-
-    @media (min-width: 1024px) {
-      .about-image-wrap {
-        aspect-ratio: 3 / 4;
-      }
-    }
-
     .about-label {
       font-size: 0.75rem;
       font-weight: 700;
@@ -692,7 +624,6 @@
       display: inline-block;
       font-family: 'Inter', sans-serif;
     }
-
     .about-title {
       font-size: clamp(1.75rem, 3.5vw, 2.75rem);
       color: var(--navy-900);
@@ -702,7 +633,6 @@
       font-weight: 700;
       line-height: 1.15;
     }
-
     .about-text {
       font-size: 1.0625rem;
       color: var(--navy-600);
@@ -710,19 +640,8 @@
       margin-bottom: 48px;
       max-width: 520px;
     }
-
-    .about-stats {
-      display: flex;
-      gap: 48px;
-      margin-bottom: 48px;
-    }
-
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
+    .about-stats { display: flex; gap: 48px; margin-bottom: 48px; }
+    .stat-item { display: flex; flex-direction: column; gap: 4px; }
     .stat-number {
       font-family: 'Sora', sans-serif;
       font-size: 2.5rem;
@@ -730,165 +649,127 @@
       color: var(--navy-900);
       line-height: 1;
     }
+    .stat-label { font-size: 0.875rem; color: var(--navy-500); font-weight: 500; }
 
-    .stat-label {
-      font-size: 0.875rem;
-      color: var(--navy-500);
-      font-weight: 500;
+    /* ===== PARTICULIERS ===== */
+    .particuliers {
+      padding: 120px 0;
+      background: var(--off-white);
     }
+    .credit-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) { .credit-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 1024px) { .credit-grid { grid-template-columns: repeat(3,1fr); } }
+    .credit-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 32px;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .credit-card.revealed { opacity: 1; transform: translateY(0); }
+    .credit-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.07);
+      border-color: rgba(212,175,55,0.25);
+    }
+    .credit-card-icon {
+      width: 52px; height: 52px;
+      background: rgba(212,175,55,0.08);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .credit-card-icon svg { width: 24px; height: 24px; }
+    .credit-card h3 { font-family: 'Sora', sans-serif; font-size: 1.125rem; color: var(--navy-900); margin-bottom: 10px; }
+    .credit-card p { font-size: 0.9rem; color: var(--navy-600); line-height: 1.7; margin-bottom: 20px; }
+    .credit-link {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    .credit-link:hover { gap: 12px; }
 
-    /* Services */
-    .services {
+    /* ===== ENTREPRISES ===== */
+    .entreprises {
       padding: 140px 0;
       background: var(--navy-900);
       position: relative;
       overflow: hidden;
     }
-
-    .services::before {
+    .entreprises::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background:
-        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 40%);
+        radial-gradient(circle at 20% 50%, rgba(212,175,55,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(212,175,55,0.03) 0%, transparent 40%);
       pointer-events: none;
     }
-
-    .services-header {
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto 80px;
-      position: relative;
-      z-index: 2;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .services-header.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .services-header .section-eyebrow {
-      color: var(--gold);
-    }
-
-    .services-header .section-title {
-      color: var(--white);
-    }
-
-    .services-header .section-body {
-      color: rgba(255, 255, 255, 0.55);
-    }
-
-    .services-grid {
+    .entreprises .section-eyebrow { color: var(--gold); }
+    .entreprises .section-title { color: var(--white); }
+    .entreprises .section-body { color: rgba(255,255,255,0.55); }
+    .entreprises-grid {
       display: grid;
       gap: 24px;
       grid-template-columns: 1fr;
       position: relative;
       z-index: 2;
     }
-
-    @media (min-width: 768px) {
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .services-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
-      }
-    }
-
-    .service-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+    @media (min-width: 768px) { .entreprises-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 1024px) { .entreprises-grid { grid-template-columns: repeat(4,1fr); } }
+    .entreprise-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
       border-radius: 20px;
-      padding: 48px 40px;
+      padding: 40px 32px;
       position: relative;
-      transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: all 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
       overflow: hidden;
       opacity: 0;
       transform: translateY(24px);
-      will-change: transform, opacity;
     }
-
-    .service-card.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .service-card::before {
+    .entreprise-card.revealed { opacity: 1; transform: translateY(0); }
+    .entreprise-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 1px solid rgba(212, 175, 55, 0.4);
+      inset: 0;
+      border: 1px solid rgba(212,175,55,0.4);
       border-radius: 20px;
       opacity: 0;
       transition: opacity 0.45s ease;
       pointer-events: none;
     }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      background: rgba(255, 255, 255, 0.04);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-    }
-
-    .service-card:hover::before {
-      opacity: 1;
-    }
-
-    .service-number {
+    .entreprise-card:hover { transform: translateY(-8px); background: rgba(255,255,255,0.04); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+    .entreprise-card:hover::before { opacity: 1; }
+    .entreprise-num {
       font-family: 'Sora', sans-serif;
-      font-size: 4rem;
+      font-size: 3.5rem;
       font-weight: 700;
-      color: rgba(212, 175, 55, 0.12);
+      color: rgba(212,175,55,0.1);
       line-height: 1;
       position: absolute;
-      top: 24px;
-      right: 32px;
+      top: 20px; right: 24px;
       user-select: none;
     }
-
-    .service-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 28px;
-      color: var(--gold);
-    }
-
-    .service-icon svg {
-      width: 32px;
-      height: 32px;
-    }
-
-    .service-title {
-      font-size: 1.375rem;
-      color: var(--white);
-      margin-bottom: 14px;
-      font-family: 'Sora', sans-serif;
-      font-weight: 600;
-    }
-
-    .service-desc {
-      font-size: 0.9375rem;
-      color: rgba(255, 255, 255, 0.55);
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-
-    .service-link {
+    .entreprise-icon { width: 48px; height: 48px; color: var(--gold); margin-bottom: 24px; }
+    .entreprise-icon svg { width: 30px; height: 30px; }
+    .entreprise-card h3 { font-family: 'Sora', sans-serif; font-size: 1.25rem; color: var(--white); margin-bottom: 12px; }
+    .entreprise-card p { font-size: 0.9375rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 28px; }
+    .entreprise-link {
       font-size: 0.875rem;
       font-weight: 600;
       color: var(--gold);
@@ -898,45 +779,68 @@
       transition: gap 0.3s ease;
       font-family: 'Inter', sans-serif;
     }
+    .entreprise-link:hover { gap: 14px; }
 
-    .service-link:hover {
-      gap: 14px;
+    /* ===== CONDITIONS ===== */
+    .conditions {
+      padding: 120px 0;
+      background: var(--white);
+    }
+    .conditions-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 768px) { .conditions-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 1024px) { .conditions-grid { grid-template-columns: repeat(3,1fr); } }
+    .condition-card {
+      background: var(--off-white);
+      border-radius: 16px;
+      padding: 36px;
+      border: 1px solid transparent;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .condition-card.revealed { opacity: 1; transform: translateY(0); }
+    .condition-card:hover { border-color: rgba(212,175,55,0.3); background: var(--white); box-shadow: 0 16px 40px rgba(0,0,0,0.06); }
+    .condition-icon {
+      width: 48px; height: 48px;
+      background: rgba(212,175,55,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .condition-icon svg { width: 22px; height: 22px; }
+    .condition-card h3 { font-family: 'Sora', sans-serif; font-size: 1.125rem; color: var(--navy-900); margin-bottom: 10px; }
+    .condition-card p { font-size: 0.9375rem; color: var(--navy-600); line-height: 1.7; }
+    .condition-highlight {
+      display: inline-block;
+      margin-top: 12px;
+      font-weight: 700;
+      color: var(--navy-900);
+      font-size: 1.125rem;
+      font-family: 'Sora', sans-serif;
     }
 
-    /* How it works */
+    /* ===== STEPS ===== */
     .steps {
       padding: 120px 0;
       background: var(--off-white);
-      position: relative;
     }
-
-    .steps-header {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 80px;
-    }
-
-    .steps-line {
-      position: relative;
-    }
-
     .steps-track {
       display: flex;
       flex-direction: column;
       gap: 60px;
       align-items: center;
+      position: relative;
     }
-
     @media (min-width: 768px) {
-      .steps-track {
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 0;
-        position: relative;
-      }
+      .steps-track { flex-direction: row; justify-content: center; align-items: flex-start; gap: 0; }
     }
-
     .step-item {
       flex: 1;
       max-width: 320px;
@@ -944,27 +848,14 @@
       padding: 0 20px;
       opacity: 0;
       transform: translateY(24px);
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.6s cubic-bezier(0.16,1,0.3,1);
     }
-
-    .step-item.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    .step-item.revealed { opacity: 1; transform: translateY(0); }
     @media (min-width: 768px) {
-      .step-item:nth-child(1) {
-        margin-right: 10%;
-      }
-
-      .step-item:nth-child(3) {
-        margin-left: 10%;
-      }
+      .step-item:nth-child(2) { margin: 0 5%; }
     }
-
     .step-circle {
-      width: 80px;
-      height: 80px;
+      width: 80px; height: 80px;
       margin: 0 auto 28px;
       border-radius: 50%;
       border: 2px solid var(--gold);
@@ -980,128 +871,113 @@
       z-index: 2;
       transition: all 0.4s ease;
     }
-
-    .step-item:hover .step-circle {
-      background: var(--gold);
-      color: var(--navy-900);
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
-    }
-
-    .step-title {
-      font-family: 'Sora', sans-serif;
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: var(--navy-900);
-      margin-bottom: 12px;
-    }
-
-    .step-desc {
-      font-size: 0.9375rem;
-      color: var(--navy-600);
-      line-height: 1.65;
-    }
-
+    .step-item:hover .step-circle { background: var(--gold); color: var(--navy-900); box-shadow: 0 0 30px rgba(212,175,55,0.3); }
+    .step-title { font-family: 'Sora', sans-serif; font-size: 1.125rem; font-weight: 600; color: var(--navy-900); margin-bottom: 12px; }
+    .step-desc { font-size: 0.9375rem; color: var(--navy-600); line-height: 1.65; }
     .steps-connector {
       display: none;
     }
-
     @media (min-width: 768px) {
       .steps-connector {
         display: block;
         position: absolute;
-        top: 40px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.3) 15%, rgba(212, 175, 55, 0.3) 85%, transparent);
+        top: 40px; left: 0;
+        width: 100%; height: 2px;
+        background: linear-gradient(to right, transparent, rgba(212,175,55,0.3) 15%, rgba(212,175,55,0.3) 85%, transparent);
         pointer-events: none;
         z-index: 1;
       }
     }
 
-    /* FAQ */
-    .faq {
+    /* ===== TÉMOIGNAGES ===== */
+    .temoignages {
       padding: 120px 0;
       background: var(--white);
     }
-
-    .faq-container {
-      max-width: 800px;
-      margin: 0 auto;
+    .temoignages-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr;
     }
+    @media (min-width: 768px) { .temoignages-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width: 1024px) { .temoignages-grid { grid-template-columns: repeat(3,1fr); } }
+    .temoignage-card {
+      background: var(--off-white);
+      border-radius: 16px;
+      padding: 36px;
+      border: 1px solid transparent;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .temoignage-card.revealed { opacity: 1; transform: translateY(0); }
+    .temoignage-card:hover { border-color: rgba(212,175,55,0.2); background: var(--white); box-shadow: 0 16px 40px rgba(0,0,0,0.06); }
+    .stars { display: flex; gap: 3px; margin-bottom: 20px; }
+    .stars svg { width: 16px; height: 16px; color: var(--gold); fill: var(--gold); }
+    .temoignage-text { font-size: 0.9375rem; color: var(--navy-700); line-height: 1.75; margin-bottom: 24px; font-style: italic; }
+    .temoignage-author { display: flex; align-items: center; gap: 14px; }
+    .author-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      color: var(--white);
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+    .author-name { font-family: 'Sora', sans-serif; font-size: 0.9375rem; font-weight: 600; color: var(--navy-900); }
+    .author-role { font-size: 0.8125rem; color: var(--navy-500); }
 
+    /* ===== FAQ ===== */
+    .faq { padding: 120px 0; background: var(--off-white); }
+    .faq-container { max-width: 800px; margin: 0 auto; }
     .faq-item {
       border-bottom: 1px solid #e2e8f0;
-      transition: border-color 0.3s ease;
       opacity: 0;
       transform: translateY(16px);
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
     }
-
-    .faq-item.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .faq-item.active {
-      border-color: var(--gold);
-    }
-
+    .faq-item.revealed { opacity: 1; transform: translateY(0); }
+    .faq-item.active { border-color: var(--gold); }
     .faq-question {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 32px 0;
+      padding: 28px 0;
       background: none;
       border: none;
       cursor: pointer;
       text-align: left;
       font-family: 'Sora', sans-serif;
-      font-size: 1.125rem;
+      font-size: 1.0625rem;
       font-weight: 600;
       color: var(--navy-900);
       line-height: 1.4;
       transition: color 0.2s ease;
     }
-
-    .faq-question:hover {
-      color: var(--navy-700);
-    }
-
     .faq-icon {
-      width: 24px;
-      height: 24px;
-      min-width: 24px;
+      width: 22px; height: 22px;
+      min-width: 22px;
       margin-left: 16px;
       color: var(--navy-500);
       transition: transform 0.3s ease, color 0.3s ease;
     }
-
-    .faq-item.active .faq-icon {
-      color: var(--gold);
-      transform: rotate(45deg);
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.45s ease;
-    }
-
-    .faq-item.active .faq-answer {
-      max-height: 300px;
-    }
-
+    .faq-item.active .faq-icon { color: var(--gold); transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.45s ease; }
+    .faq-item.active .faq-answer { max-height: 300px; }
     .faq-answer-inner {
-      padding-bottom: 32px;
-      font-size: 1rem;
+      padding-bottom: 28px;
+      font-size: 0.9375rem;
       color: var(--navy-600);
       line-height: 1.75;
-      font-family: 'Inter', sans-serif;
     }
 
-    /* CTA Banner */
+    /* ===== CTA BANNER ===== */
     .cta-banner {
       padding: 120px 24px;
       background: var(--navy-950);
@@ -1109,20 +985,12 @@
       overflow: hidden;
       text-align: center;
     }
-
     .cta-banner-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.07) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(212,175,55,0.07) 0%, transparent 70%);
     }
-
-    .cta-banner-wrapper {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
+    .cta-banner-wrapper { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
     .cta-banner-title {
       font-size: clamp(2rem, 5vw, 3.5rem);
       color: var(--white);
@@ -1131,15 +999,13 @@
       margin-bottom: 24px;
       line-height: 1.15;
     }
-
     .cta-banner-desc {
       font-size: 1.125rem;
-      color: rgba(255, 255, 255, 0.55);
+      color: rgba(255,255,255,0.55);
       max-width: 560px;
       margin: 0 auto 48px;
       line-height: 1.7;
     }
-
     .btn-gold-large {
       padding: 20px 48px;
       background: var(--gold);
@@ -1157,35 +1023,26 @@
       transition: all 0.3s ease;
       line-height: 1;
     }
-
     .btn-gold-large:hover {
       background: var(--gold-dark);
       transform: translateY(-3px);
-      box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 20px 50px rgba(212,175,55,0.3);
     }
 
-    /* Footer */
+    /* ===== FOOTER ===== */
     .footer {
       background: var(--navy-950);
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      border-top: 1px solid rgba(255,255,255,0.04);
       padding-top: 80px;
       padding-bottom: 40px;
     }
-
     .footer-grid {
       display: grid;
       gap: 48px;
       grid-template-columns: 1fr;
       margin-bottom: 64px;
     }
-
-    @media (min-width: 768px) {
-      .footer-grid {
-        grid-template-columns: 1.5fr 1fr 1.5fr;
-        gap: 64px;
-      }
-    }
-
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; } }
     .footer-logo {
       font-family: 'Sora', sans-serif;
       font-size: 1.5rem;
@@ -1196,67 +1053,43 @@
       align-items: center;
       gap: 2px;
     }
-
-    .footer-logo .dot {
-      color: var(--gold);
-    }
-
+    .footer-logo .dot { color: var(--gold); }
     .footer-about {
-      font-size: 0.9375rem;
-      color: rgba(255, 255, 255, 0.45);
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.4);
       line-height: 1.8;
-      max-width: 320px;
+      max-width: 300px;
       margin-bottom: 24px;
     }
-
     .footer-title {
       font-family: 'Sora', sans-serif;
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
       font-weight: 600;
       color: var(--white);
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
-
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
+    .footer-links { display: flex; flex-direction: column; gap: 12px; }
     .footer-links a {
-      font-size: 0.9375rem;
-      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.45);
       transition: color 0.2s ease;
       display: inline-block;
     }
-
-    .footer-links a:hover {
-      color: var(--gold);
-      padding-left: 4px;
-    }
-
+    .footer-links a:hover { color: var(--gold); padding-left: 4px; }
     .footer-contact p {
-      font-size: 0.9375rem;
-      color: rgba(255, 255, 255, 0.55);
-      margin-bottom: 16px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 14px;
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 10px;
       line-height: 1.6;
     }
-
-    .footer-contact svg {
-      width: 18px;
-      height: 18px;
-      color: var(--gold);
-      margin-top: 2px;
-      min-width: 18px;
-    }
-
+    .footer-contact svg { width: 16px; height: 16px; color: var(--gold); margin-top: 2px; min-width: 16px; }
     .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid rgba(255,255,255,0.06);
       padding-top: 32px;
       display: flex;
       flex-direction: column;
@@ -1264,32 +1097,14 @@
       align-items: center;
       justify-content: space-between;
     }
+    @media (min-width: 768px) { .footer-bottom { flex-direction: row; } }
+    .footer-copyright { font-size: 0.8125rem; color: rgba(255,255,255,0.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 0.8125rem; color: rgba(255,255,255,0.3); transition: color 0.2s ease; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
 
-    @media (min-width: 768px) {
-      .footer-bottom {
-        flex-direction: row;
-      }
-    }
-
-    .footer-copyright {
-      font-size: 0.8125rem;
-      color: rgba(255, 255, 255, 0.35);
-    }
-
-    .footer-legal {
-      display: flex;
-      gap: 24px;
-    }
-
-    .footer-legal a {
-      font-size: 0.8125rem;
-      color: rgba(255, 255, 255, 0.35);
-      transition: color 0.2s ease;
-    }
-
-    .footer-legal a:hover {
-      color: rgba(255, 255, 255, 0.6);
-    }
+    /* Arrow SVG inline */
+    .arrow-icon { display: inline-flex; }
   </style>
 </head>
 <body>
@@ -1298,14 +1113,81 @@
   <nav class="navbar" id="navbar">
     <div class="container navbar-inner">
       <a href="#" class="logo">SINBA<span class="dot">.</span></a>
+
       <div class="nav-links">
-        <a href="#home">Accueil</a>
-        <a href="#prets">Nos Crédits</a>
-        <a href="#investissement">Crédit Investissement</a>
-        <a href="#conditions">Nos Conditions</a>
-        <a href="#demande">Demande de Crédit</a>
+        <!-- Accueil -->
+        <div class="nav-item">
+          <a href="#home">Accueil</a>
+        </div>
+
+        <!-- Particuliers dropdown -->
+        <div class="nav-item">
+          <button class="nav-btn">
+            Particuliers
+            <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </button>
+          <div class="dropdown">
+            <div class="dropdown-label">Crédits Particuliers</div>
+            <a href="#particuliers">
+              <span class="dd-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg></span>
+              Prêt personnel
+            </a>
+            <a href="#particuliers">
+              <span class="dd-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg></span>
+              Crédit mariage & événement
+            </a>
+            <a href="#particuliers">
+              <span class="dd-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg></span>
+              Crédit médical
+            </a>
+            <a href="#particuliers">
+              <span class="dd-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg></span>
+              Rachat de crédit
+            </a>
+            <a href="#particuliers">
+              <span class="dd-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg></span>
+              Crédit auto
+            </a>
+            <a href="#particuliers">
+              <span class="dd-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.44 1.152-.44 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg></span>
+              Crédit immobilier & rénovation
+            </a>
+          </div>
+        </div>
+
+        <!-- Entreprises dropdown -->
+        <div class="nav-item">
+          <button class="nav-btn">
+            Entreprises
+            <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          </button>
+          <div class="dropdown">
+            <div class="dropdown-label">Crédits Entreprises</div>
+            <a href="#entreprises">
+              <span class="dd-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg></span>
+              Crédit de création
+            </a>
+            <a href="#entreprises">
+              <span class="dd-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" /></svg></span>
+              Crédit de fonctionnement
+            </a>
+            <a href="#entreprises">
+              <span class="dd-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" /></svg></span>
+              Crédit équipement
+            </a>
+            <a href="#entreprises">
+              <span class="dd-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg></span>
+              Crédit d'expansion
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-item"><a href="#conditions">Nos Conditions</a></div>
+        <div class="nav-item"><a href="#contact">Contact</a></div>
       </div>
+
       <a href="#demande" class="nav-cta">Faire une demande</a>
+
       <button class="mobile-menu-btn" id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false">
         <span class="bar"></span>
         <span class="bar"></span>
@@ -1316,30 +1198,61 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#home">Accueil</a>
-    <a href="#prets">Nos Crédits</a>
-    <a href="#investissement">Crédit Investissement</a>
-    <a href="#conditions">Nos Conditions</a>
-    <a href="#demande" class="btn btn-primary">Faire une demande</a>
+    <a href="#home" class="mobile-simple-link">Accueil</a>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-top" onclick="toggleMobileSub(this)">
+        <span>Particuliers</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+      </div>
+      <div class="mobile-sub">
+        <a href="#particuliers">Prêt personnel</a>
+        <a href="#particuliers">Crédit mariage & événement</a>
+        <a href="#particuliers">Crédit médical</a>
+        <a href="#particuliers">Rachat de crédit</a>
+        <a href="#particuliers">Crédit auto</a>
+        <a href="#particuliers">Crédit immobilier & rénovation</a>
+      </div>
+    </div>
+
+    <div class="mobile-nav-item">
+      <div class="mobile-nav-top" onclick="toggleMobileSub(this)">
+        <span>Entreprises</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+      </div>
+      <div class="mobile-sub">
+        <a href="#entreprises">Crédit de création</a>
+        <a href="#entreprises">Crédit de fonctionnement</a>
+        <a href="#entreprises">Crédit équipement</a>
+        <a href="#entreprises">Crédit d'expansion</a>
+      </div>
+    </div>
+
+    <a href="#conditions" class="mobile-simple-link">Nos Conditions</a>
+    <a href="#contact" class="mobile-simple-link">Contact</a>
+
+    <div class="mobile-cta">
+      <a href="#demande" class="btn btn-primary" style="width:100%;justify-content:center;">Faire une demande</a>
+    </div>
   </div>
 
-  <!-- Hero -->
+  <!-- ===== HERO ===== -->
   <section class="hero" id="home">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-grid-pattern"></div>
     <div class="hero-content">
-      <div class="hero-badge">N°1 du crédit en ligne en Europe</div>
-      <h1 class="hero-title">Le crédit qui vous <span>correspond</span></h1>
-      <p class="hero-desc">Des solutions de financement sur mesure pour particuliers et professionnels. Réponse rapide sous 24h, taux compétitifs et sécurité maximale.</p>
+      <div class="hero-badge">Financement flexible pour vos projets</div>
+      <h1 class="hero-title">Le financement qui <span>vous correspond</span></h1>
+      <p class="hero-desc">Que ce soit pour vos projets personnels ou vos investissements professionnels — nous vous aidons à trouver le financement adapté. Réponse sous 24h, 100% digital, taux compétitifs.</p>
       <div class="hero-ctas">
         <a href="#demande" class="btn btn-primary">Faire une demande</a>
-        <a href="#prets" class="btn btn-secondary">Découvrir nos offres</a>
+        <a href="#particuliers" class="btn btn-secondary">Découvrir nos offres</a>
       </div>
       <div class="hero-trust">
         <div class="trust-item">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-          <span>Depuis 2008</span>
+          <span>Préapprobation immédiate</span>
         </div>
         <div class="trust-item">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
@@ -1349,44 +1262,56 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>
           <span>100% Sécurisé</span>
         </div>
+        <div class="trust-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+          <span>Fonds sous 48h</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Features -->
+  <!-- ===== FEATURES ===== -->
   <section class="features" id="prets">
     <div class="container">
-      <div class="features-header" style="margin-bottom: 64px;">
-        <div class="section-eyebrow">Pourquoi choisir SINBA ?</div>
+      <div class="section-header">
+        <div class="section-eyebrow">Pourquoi nous choisir ?</div>
         <h2 class="section-title">Une expérience pensée pour vous</h2>
+        <p class="section-body">Des solutions de financement modernes, transparentes et adaptées à chaque projet de vie ou d'entreprise.</p>
       </div>
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
           </div>
-          <h3 class="feature-title">Taux Avantageux</h3>
-          <p class="feature-desc">Profitez de taux d'intérêt compétitifs, négociés pour vous faire économiser sur la durée de votre crédit, sans frais cachés.</p>
+          <h3 class="feature-title">Préapprobation immédiate</h3>
+          <p class="feature-desc">Obtenez une réponse de principe dans les 24 heures. Processus 100% digital, sans attente inutile.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008Z" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
           </div>
-          <h3 class="feature-title">Paiements Spéciaux</h3>
-          <p class="feature-desc">Effectuez des versements anticipés ou réguliers supplémentaires pour réduire la durée de votre prêt sans aucune pénalité.</p>
+          <h3 class="feature-title">Projets de vie</h3>
+          <p class="feature-desc">Mariage, rénovation, voyage ou dépenses imprévues — taux fixes attractifs et déblocage rapide des fonds.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>
           </div>
-          <h3 class="feature-title">Pause de Mensualité</h3>
-          <p class="feature-desc">Des moments difficiles ? Réduisez ou suspendez temporairement vos mensualités selon vos besoins, en toute transparence.</p>
+          <h3 class="feature-title">Entreprises & Indépendants</h3>
+          <p class="feature-desc">De la création à l'expansion — solutions de trésorerie et d'investissement sur mesure avec réponse sous 24h.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>
+          </div>
+          <h3 class="feature-title">100% Digital</h3>
+          <p class="feature-desc">Déposez votre demande depuis chez vous. Signature électronique, envoi sécurisé et suivi en temps réel.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About -->
+  <!-- ===== ABOUT ===== -->
   <section class="about">
     <div class="container">
       <div class="about-grid">
@@ -1396,100 +1321,292 @@
         </div>
         <div class="about-content">
           <span class="about-label">À Propos</span>
-          <h2 class="about-title">Votre partenaire financier de confiance depuis plus d'une décennie</h2>
-          <p class="about-text">Née en 2008, notre institution européenne de crédit en ligne met son expertise au service de vos projets. Nous combinons une approche humaine à une technologie de pointe pour vous offrir des solutions de financement transparentes, rapides et adaptées à chaque situation.</p>
+          <h2 class="about-title">Nous réinventons les règles de la banque traditionnelle</h2>
+          <p class="about-text">SINBA est un établissement européen de crédit en ligne qui place le succès de ses clients au cœur de sa mission. Nous combinons technologie de pointe et approche humaine pour vous offrir des solutions de financement transparentes, rapides et adaptées à chaque situation — que vous soyez particulier ou professionnel.</p>
           <div class="about-stats">
             <div class="stat-item">
-              <div class="stat-number">15+</div>
-              <div class="stat-label">ans d'expérience</div>
+              <div class="stat-number">24h</div>
+              <div class="stat-label">Réponse garantie</div>
             </div>
             <div class="stat-item">
-              <div class="stat-number">10 000+</div>
-              <div class="stat-label">clients satisfaits</div>
+              <div class="stat-number">3%</div>
+              <div class="stat-label">Taux à partir de</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">48h</div>
+              <div class="stat-label">Déblocage des fonds</div>
             </div>
           </div>
-          <a href="#" class="btn btn-dark">En savoir plus sur nous</a>
+          <a href="#demande" class="btn btn-dark">Faire une demande →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services -->
-  <section class="services" id="investissement">
+  <!-- ===== PARTICULIERS ===== -->
+  <section class="particuliers" id="particuliers">
     <div class="container">
-      <div class="services-header">
-        <div class="section-eyebrow">Nos Solutions</div>
-        <h2 class="section-title">Nos Solutions de Crédit</h2>
-        <p class="section-body">Que vous soyez particulier ou professionnel, nous avons conçu des produits adaptés à chaque étape de vos projets.</p>
+      <div class="section-header">
+        <div class="section-eyebrow">Crédits Particuliers</div>
+        <h2 class="section-title">Financement pour vos projets personnels</h2>
+        <p class="section-body">Avec nos solutions flexibles, financez vos projets personnels simplement et en toute sécurité — de manière transparente, rapide et sur mesure.</p>
       </div>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-number">01</div>
-          <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>
+      <div class="credit-grid">
+        <div class="credit-card">
+          <div class="credit-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
           </div>
-          <h3 class="service-title">Crédit Professionnel</h3>
-          <p class="service-desc">Financement dédié aux entreprises et professionnels : matériel, développement, trésorerie. Des solutions sur mesure pour faire grandir votre activité.</p>
-          <a href="#" class="service-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
+          <h3>Prêt personnel</h3>
+          <p>Le crédit classique pour vos projets privés. Financement flexible pour vos achats importants, projets personnels ou dépenses imprévues.</p>
+          <a href="#demande" class="credit-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
         </div>
-
-        <div class="service-card">
-          <div class="service-number">02</div>
-          <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.44 1.152-.44 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
+        <div class="credit-card">
+          <div class="credit-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
           </div>
-          <h3 class="service-title">Crédit Particulier</h3>
-          <p class="service-desc">Qu'il s'agisse de travaux, d'un voyage ou d'une urgence, obtenez un crédit personnel adapté à votre capacité de remboursement.</p>
-          <a href="#" class="service-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
+          <h3>Crédit mariage & événement</h3>
+          <p>Planifiez votre mariage ou une grande célébration sereinement. Un financement adapté pour profiter de votre grand jour sans souci financier.</p>
+          <a href="#demande" class="credit-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
         </div>
-
-        <div class="service-card">
-          <div class="service-number">03</div>
-          <div class="service-icon">
+        <div class="credit-card">
+          <div class="credit-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
+          </div>
+          <h3>Crédit médical</h3>
+          <p>La santé avant tout. Notre financement médical vous permet de prendre en charge rapidement et simplement des traitements importants.</p>
+          <a href="#demande" class="credit-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
+        </div>
+        <div class="credit-card">
+          <div class="credit-card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
           </div>
-          <h3 class="service-title">Regroupement de Crédits</h3>
-          <p class="service-desc">Simplifiez votre budget en regroupant vos crédits en un seul contrat avec une mensualité unique et un taux optimisé.</p>
-          <a href="#" class="service-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
+          <h3>Rachat de crédit</h3>
+          <p>Regroupez plusieurs crédits en une seule mensualité et améliorez votre budget. Plus de clarté, moins de stress financier.</p>
+          <a href="#demande" class="credit-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
+        </div>
+        <div class="credit-card">
+          <div class="credit-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
+          </div>
+          <h3>Crédit auto</h3>
+          <p>Financez votre véhicule neuf ou d'occasion à des conditions avantageuses et restez mobile en toute liberté.</p>
+          <a href="#demande" class="credit-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
+        </div>
+        <div class="credit-card">
+          <div class="credit-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.44 1.152-.44 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
+          </div>
+          <h3>Crédit immobilier & rénovation</h3>
+          <p>Achat, construction ou rénovation — notre financement immobilier vous accompagne pour réaliser votre projet en toute sérénité.</p>
+          <a href="#demande" class="credit-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How It Works -->
+  <!-- ===== ENTREPRISES ===== -->
+  <section class="entreprises" id="entreprises">
+    <div class="container">
+      <div class="section-header" style="position:relative;z-index:2;">
+        <div class="section-eyebrow">Crédits Entreprises</div>
+        <h2 class="section-title">Solutions de financement sur mesure pour les professionnels</h2>
+        <p class="section-body">De la création à l'expansion, nous vous accompagnons avec des solutions flexibles pour offrir stabilité et croissance à votre entreprise.</p>
+      </div>
+      <div class="entreprises-grid">
+        <div class="entreprise-card">
+          <div class="entreprise-num">01</div>
+          <div class="entreprise-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
+          </div>
+          <h3>Crédit de création</h3>
+          <p>Lancez votre entreprise sur une base financière solide. Notre financement de démarrage soutient vos premiers investissements et la mise en place de votre activité.</p>
+          <a href="#demande" class="entreprise-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
+        </div>
+        <div class="entreprise-card">
+          <div class="entreprise-num">02</div>
+          <div class="entreprise-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5" /></svg>
+          </div>
+          <h3>Crédit de fonctionnement</h3>
+          <p>Assurez votre trésorerie et couvrez vos charges courantes ou besoins ponctuels de financement de manière fiable et rapide.</p>
+          <a href="#demande" class="entreprise-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
+        </div>
+        <div class="entreprise-card">
+          <div class="entreprise-num">03</div>
+          <div class="entreprise-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" /></svg>
+          </div>
+          <h3>Crédit équipement</h3>
+          <p>Financez vos machines, équipements ou matériel informatique pour booster votre productivité et développer votre entreprise.</p>
+          <a href="#demande" class="entreprise-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
+        </div>
+        <div class="entreprise-card">
+          <div class="entreprise-num">04</div>
+          <div class="entreprise-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>
+          </div>
+          <h3>Crédit d'expansion</h3>
+          <p>Financez l'extension ou la modernisation de vos locaux et créez les bases de votre future croissance.</p>
+          <a href="#demande" class="entreprise-link">En savoir plus <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" /></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONDITIONS ===== -->
+  <section class="conditions" id="conditions">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Nos Conditions</div>
+        <h2 class="section-title">Comment fonctionne notre financement</h2>
+        <p class="section-body">Des conditions simples et transparentes pour obtenir votre crédit rapidement et sereinement.</p>
+      </div>
+      <div class="conditions-grid">
+        <div class="condition-card">
+          <div class="condition-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
+          </div>
+          <h3>Conditions d'éligibilité</h3>
+          <p>Être âgé d'au moins 18 ans et disposer d'un revenu régulier à partir de 200 € par mois. Vous vous engagez à respecter les conditions de remboursement convenues.</p>
+        </div>
+        <div class="condition-card">
+          <div class="condition-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+          </div>
+          <h3>Documents requis</h3>
+          <p>Une pièce d'identité valide, une justification d'adresse, un justificatif de revenus et un relevé de compte ou attestation bancaire.</p>
+        </div>
+        <div class="condition-card">
+          <div class="condition-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" /></svg>
+          </div>
+          <h3>Taux d'intérêt</h3>
+          <p>Bénéficiez d'un taux fixe attractif selon le montant et la durée choisie.</p>
+          <span class="condition-highlight">À partir de 3% / an</span>
+        </div>
+        <div class="condition-card">
+          <div class="condition-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" /></svg>
+          </div>
+          <h3>Durées flexibles</h3>
+          <p>Choisissez librement la durée de votre crédit et adaptez vos mensualités à votre budget.</p>
+          <span class="condition-highlight">6 à 360 mois</span>
+        </div>
+        <div class="condition-card">
+          <div class="condition-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>
+          </div>
+          <h3>Vos avantages</h3>
+          <p>Traitement rapide, remboursement flexible et totale transparence. Déblocage des fonds sous 48h après accord. Remboursement anticipé sans pénalités.</p>
+        </div>
+        <div class="condition-card">
+          <div class="condition-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+          </div>
+          <h3>Sécurité & confidentialité</h3>
+          <p>Vos données sont chiffrées dès leur transmission et conservées conformément au RGPD. Aucun partage avec des tiers sans votre consentement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STEPS ===== -->
   <section class="steps">
     <div class="container">
-      <div class="steps-header section-header">
+      <div class="section-header">
         <div class="section-eyebrow">Processus</div>
         <h2 class="section-title">Comment ça marche</h2>
-        <p class="section-body">Trois étapes simples pour obtenir votre crédit en ligne, de la demande à la signature.</p>
+        <p class="section-body">Trois étapes simples pour obtenir votre financement, de la demande jusqu'à la signature.</p>
       </div>
-
-      <div class="steps-line steps-track">
+      <div class="steps-track" style="position:relative;">
         <div class="steps-connector"></div>
         <div class="step-item">
           <div class="step-circle">1</div>
           <h3 class="step-title">Remplir le formulaire</h3>
-          <p class="step-desc">Complétez votre demande en ligne en 3 minutes chrono. Pas de paperasse requise, 100% numérique.</p>
+          <p class="step-desc">Complétez votre demande en ligne en quelques minutes. 100% numérique, sans papier ni déplacement.</p>
         </div>
         <div class="step-item">
           <div class="step-circle">2</div>
           <h3 class="step-title">Traitement de la demande</h3>
-          <p class="step-desc">Notre équipe analyse instantanément votre dossier et vous transmet une réponse de principe sous 24 heures maximum.</p>
+          <p class="step-desc">Notre équipe analyse votre dossier et vous transmet une réponse de principe sous 24 heures maximum.</p>
         </div>
         <div class="step-item">
           <div class="step-circle">3</div>
-          <h3 class="step-title">Signature du contrat</h3>
-          <p class="step-desc">Signez électroniquement en toute sécurité et recevez vos fonds directement sur votre compte bancaire.</p>
+          <h3 class="step-title">Signature & déblocage</h3>
+          <p class="step-desc">Signez électroniquement en toute sécurité et recevez vos fonds directement sur votre compte sous 48h.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="faq" id="conditions">
+  <!-- ===== TÉMOIGNAGES ===== -->
+  <section class="temoignages">
     <div class="container">
-      <div class="section-header" style="margin-bottom: 64px;">
+      <div class="section-header">
+        <div class="section-eyebrow">Témoignages</div>
+        <h2 class="section-title">Clients satisfaits</h2>
+        <p class="section-body">Des particuliers et professionnels qui nous font confiance pour financer leurs projets.</p>
+      </div>
+      <div class="temoignages-grid">
+        <div class="temoignage-card">
+          <div class="stars">
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="temoignage-text">"Traitement rapide et conditions claires. Ce crédit m'a aidé à développer mon petit commerce sans stress."</p>
+          <div class="temoignage-author">
+            <div class="author-avatar">TS</div>
+            <div>
+              <div class="author-name">Thomas Schneider</div>
+              <div class="author-role">Électricien</div>
+            </div>
+          </div>
+        </div>
+        <div class="temoignage-card">
+          <div class="stars">
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="temoignage-text">"Très satisfaite du service. Le prêt a été traité rapidement et m'a aidée à agrandir mon salon."</p>
+          <div class="temoignage-author">
+            <div class="author-avatar">SV</div>
+            <div>
+              <div class="author-name">Sanne de Vries</div>
+              <div class="author-role">Coiffeuse</div>
+            </div>
+          </div>
+        </div>
+        <div class="temoignage-card">
+          <div class="stars">
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="temoignage-text">"La demande était simple et la réponse est arrivée rapidement. Une grande aide pour mon activité."</p>
+          <div class="temoignage-author">
+            <div class="author-avatar">AM</div>
+            <div>
+              <div class="author-name">Anna Müller</div>
+              <div class="author-role">Boulangère</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq">
+    <div class="container">
+      <div class="section-header">
         <div class="section-eyebrow">FAQ</div>
         <h2 class="section-title">Questions fréquentes</h2>
         <p class="section-body">Tout ce que vous devez savoir avant de souscrire votre crédit chez SINBA.</p>
@@ -1501,7 +1618,7 @@
             <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Pour souscrire un crédit chez SINBA, vous devez être majeur, résider dans l'Union européenne et justifier de revenus réguliers. Notre simulateur en ligne vous permet de vérifier votre éligibilité en quelques secondes, sans engagement quelconque.</div>
+            <div class="faq-answer-inner">Pour souscrire un crédit chez SINBA, vous devez avoir au moins 18 ans et disposer d'un revenu régulier à partir de 200 € par mois. Vous vous engagez à respecter les conditions de remboursement convenues. Notre processus est simplifié pour une réponse rapide.</div>
           </div>
         </div>
         <div class="faq-item">
@@ -1510,7 +1627,7 @@
             <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Après validation de votre dossier et signature électronique, les fonds sont généralement versés sous 48 à 72 heures ouvrées directement sur votre compte bancaire sécurisé, sous réserve de conformité du dossier.</div>
+            <div class="faq-answer-inner">Après validation de votre dossier et signature électronique, les fonds sont généralement versés sous 48 heures directement sur votre compte bancaire, sous réserve de conformité du dossier.</div>
           </div>
         </div>
         <div class="faq-item">
@@ -1519,73 +1636,93 @@
             <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Oui, vous pouvez effectuer un remboursement anticipé partiel ou total à tout moment de la durée de votre contrat. Nous appliquons les taux légaux sans frais cachés ni pénalités abusives.</div>
+            <div class="faq-answer-inner">Oui, vous pouvez effectuer un remboursement anticipé partiel ou total à tout moment sans frais supplémentaires ni pénalités. La flexibilité est au cœur de notre offre.</div>
           </div>
         </div>
         <div class="faq-item">
           <button class="faq-question">
-            <span>Mes données sont-elles protégées ?</span>
+            <span>Quels documents dois-je fournir ?</span>
             <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Absolument. Vos données personnelles sont chiffrées dès leur transmission et conservées en conformité stricte avec le RGPD. Nous ne partageons jamais vos informations avec des tiers non autorisés sans votre consentement explicite.</div>
+            <div class="faq-answer-inner">Il vous suffit de fournir : une pièce d'identité valide, un justificatif de domicile, un justificatif de revenus (bulletins de salaire ou bilans pour les indépendants) et un relevé de compte bancaire récent. Tout se fait en ligne, sans déplacement.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Mes données personnelles sont-elles protégées ?</span>
+            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Absolument. Vos données sont chiffrées dès leur transmission et conservées en conformité avec le RGPD. Nous ne partageons jamais vos informations avec des tiers non autorisés sans votre consentement explicite.</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Banner -->
+  <!-- ===== CTA BANNER ===== -->
   <section class="cta-banner" id="demande">
     <div class="cta-banner-bg"></div>
     <div class="cta-banner-wrapper">
       <h2 class="cta-banner-title">Prêt à concrétiser vos projets ?</h2>
-      <p class="cta-banner-desc">Inscrivez-vous dès aujourd'hui et recevez une réponse de principe immédiate. Zéro engagement, zéro papier, 100% en ligne.</p>
-      <a href="#" class="btn-gold-large">
-        Obtenir mon crédit
+      <p class="cta-banner-desc">Déposez votre demande dès aujourd'hui et obtenez une réponse de principe sous 24h. Zéro engagement, zéro papier, 100% en ligne.</p>
+      <a href="mailto:contact@sinba.com" class="btn-gold-large">
+        Faire une demande
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
       </a>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="contact">
     <div class="container">
       <div class="footer-grid">
         <div>
           <div class="footer-logo">SINBA<span class="dot">.</span></div>
-          <p class="footer-about">SINBA est une société de crédit en ligne européenne régulée, engagée à offrir des solutions de financement transparentes, rapides et sécurisées depuis 2008.</p>
+          <p class="footer-about">Nous réinventons les règles de la banque traditionnelle. Notre succès est indissociable de celui de nos clients — particuliers comme professionnels.</p>
         </div>
         <div>
           <div class="footer-title">Navigation</div>
           <div class="footer-links">
             <a href="#home">Accueil</a>
-            <a href="#prets">Nos Crédits</a>
-            <a href="#investissement">Crédit Investissement</a>
+            <a href="#particuliers">Particuliers</a>
+            <a href="#entreprises">Entreprises</a>
             <a href="#conditions">Nos Conditions</a>
-            <a href="#demande">Nous Contacter</a>
+            <a href="#demande">Demande de crédit</a>
           </div>
         </div>
         <div>
-          <div class="footer-title">Coordonnées</div>
+          <div class="footer-title">Particuliers</div>
+          <div class="footer-links">
+            <a href="#particuliers">Prêt personnel</a>
+            <a href="#particuliers">Crédit mariage</a>
+            <a href="#particuliers">Crédit médical</a>
+            <a href="#particuliers">Rachat de crédit</a>
+            <a href="#particuliers">Crédit auto</a>
+            <a href="#particuliers">Crédit immobilier</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-title">Contact</div>
           <div class="footer-contact">
             <p>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
-              24 Rue de la Paix, 75002 Paris, France
+              Mödlareuth 1, 95183 Topen, Bayern, Deutschland
+            </p>
+            <p>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
+              01522 3395362
             </p>
             <p>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
               contact@sinba.com
             </p>
-            <p>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
-              +33 1 23 45 67 89
-            </p>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copyright">© 2024 Sinba. Tous droits réservés.</div>
+        <div class="footer-copyright">© 2025 SINBA. Tous droits réservés.</div>
         <div class="footer-legal">
           <a href="#">Politique de confidentialité</a>
           <a href="#">Mentions légales</a>
@@ -1596,24 +1733,19 @@
   </footer>
 
   <script>
-    // Navbar scroll effect
+    // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Mobile menu toggle
+    // Mobile menu
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     let menuOpen = false;
-
     menuBtn.addEventListener('click', () => {
       menuOpen = !menuOpen;
-      mobileMenu.classList.toggle('active');
+      mobileMenu.classList.toggle('active', menuOpen);
       menuBtn.setAttribute('aria-expanded', menuOpen);
       const bars = menuBtn.querySelectorAll('.bar');
       if (menuOpen) {
@@ -1626,12 +1758,10 @@
         bars[2].style.transform = 'none';
       }
     });
-
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         menuOpen = false;
         mobileMenu.classList.remove('active');
-        menuBtn.setAttribute('aria-expanded', 'false');
         const bars = menuBtn.querySelectorAll('.bar');
         bars[0].style.transform = 'none';
         bars[1].style.opacity = '1';
@@ -1639,31 +1769,36 @@
       });
     });
 
+    // Mobile sub-menus
+    function toggleMobileSub(el) {
+      const item = el.closest('.mobile-nav-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.mobile-nav-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
     // FAQ Accordion
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-      const question = item.querySelector('.faq-question');
-      question.addEventListener('click', () => {
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
         const isActive = item.classList.contains('active');
-        faqItems.forEach(i => i.classList.remove('active'));
-        if (!isActive) {
-          item.classList.add('active');
-        }
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
       });
     });
 
-    // Scroll reveal animation
-    const revealElements = document.querySelectorAll('.feature-card, .service-card, .step-item, .faq-item, .services-header');
-    const revealObserver = new IntersectionObserver((entries) => {
+    // Scroll reveal
+    const revealEls = document.querySelectorAll(
+      '.feature-card, .credit-card, .entreprise-card, .condition-card, .temoignage-card, .step-item, .faq-item'
+    );
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
-          revealObserver.unobserve(entry.target);
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
-
-    revealElements.forEach(el => revealObserver.observe(el));
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
