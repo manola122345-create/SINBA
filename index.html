@@ -1121,7 +1121,7 @@
     .arrow-icon { display: inline-flex; }
 
     /* ===== LANGUAGE SWITCHER ===== */
-    .lang-switcher { position: relative; margin-left: 8px; }
+    .lang-switcher { position: relative; margin-left: 8px; display: flex; align-items: center; }
     .lang-btn {
       display: flex; align-items: center; gap: 6px;
       background: rgba(255,255,255,0.1);
@@ -1134,27 +1134,28 @@
       font-weight: 600;
       color: var(--white);
       transition: all 0.2s;
+      white-space: nowrap;
     }
     .navbar.scrolled .lang-btn {
       background: rgba(0,0,0,0.05);
       border-color: rgba(0,0,0,0.1);
       color: var(--navy-800);
     }
-    .lang-btn:hover { background: rgba(212,175,55,0.15); border-color: rgba(212,175,55,0.3); }
+    .lang-btn:hover { background: rgba(212,175,55,0.15); border-color: rgba(212,175,55,0.4); color: var(--gold); }
     .lang-menu {
-      position: absolute; top: calc(100% + 8px); right: 0;
+      position: absolute; top: calc(100% + 10px); right: 0;
       background: var(--white);
       border-radius: 10px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-      border: 1px solid rgba(0,0,0,0.06);
-      min-width: 140px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+      border: 1px solid rgba(0,0,0,0.08);
+      min-width: 150px;
       overflow: hidden;
       display: none;
-      z-index: 100;
+      z-index: 9999;
     }
     .lang-menu.open { display: block; }
     .lang-option {
-      padding: 11px 16px;
+      padding: 12px 16px;
       font-size: 0.875rem;
       color: var(--navy-700);
       cursor: pointer;
@@ -1162,7 +1163,7 @@
       font-weight: 500;
       transition: background 0.15s;
     }
-    .lang-option:hover { background: rgba(212,175,55,0.08); color: var(--navy-900); }
+    .lang-option:hover { background: rgba(212,175,55,0.1); color: var(--navy-900); }
 
     /* ===== FORMULAIRE DEMANDE ===== */
     .form-step { display: none; }
@@ -1419,9 +1420,9 @@
 
       <a href="#demande" class="nav-cta" data-i18n="nav_cta">Faire une demande</a>
 
-      <!-- Language Switcher -->
-      <div class="lang-switcher" id="langSwitcher">
-        <button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">
+      <!-- Language Switcher — toujours visible -->
+      <div class="lang-switcher" id="langSwitcher" style="z-index:1002;position:relative;">
+        <button class="lang-btn" id="langBtn" onclick="toggleLangMenu(event)">
           <span id="currentLangFlag">🇫🇷</span>
           <span id="currentLangCode">FR</span>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
@@ -2414,11 +2415,12 @@
       if (sendBtn) sendBtn.innerHTML = t.form_send + ' <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>';
     }
 
-    function toggleLangMenu() {
+    function toggleLangMenu(e) {
+      if (e) e.stopPropagation();
       document.getElementById('langMenu').classList.toggle('open');
     }
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('#langSwitcher')) {
+      if (!document.getElementById('langSwitcher').contains(e.target)) {
         document.getElementById('langMenu').classList.remove('open');
       }
     });
