@@ -1120,6 +1120,50 @@
     /* Arrow SVG inline */
     .arrow-icon { display: inline-flex; }
 
+    /* ===== LANGUAGE SWITCHER ===== */
+    .lang-switcher { position: relative; margin-left: 8px; }
+    .lang-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--white);
+      transition: all 0.2s;
+    }
+    .navbar.scrolled .lang-btn {
+      background: rgba(0,0,0,0.05);
+      border-color: rgba(0,0,0,0.1);
+      color: var(--navy-800);
+    }
+    .lang-btn:hover { background: rgba(212,175,55,0.15); border-color: rgba(212,175,55,0.3); }
+    .lang-menu {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+      border: 1px solid rgba(0,0,0,0.06);
+      min-width: 140px;
+      overflow: hidden;
+      display: none;
+      z-index: 100;
+    }
+    .lang-menu.open { display: block; }
+    .lang-option {
+      padding: 11px 16px;
+      font-size: 0.875rem;
+      color: var(--navy-700);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      transition: background 0.15s;
+    }
+    .lang-option:hover { background: rgba(212,175,55,0.08); color: var(--navy-900); }
+
     /* ===== FORMULAIRE DEMANDE ===== */
     .form-step { display: none; }
     .form-step.active-step { display: block; }
@@ -1292,6 +1336,7 @@
       border-bottom: 2px solid rgba(212,175,55,0.2);
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -1372,7 +1417,22 @@
         <div class="nav-item"><a href="#contact">Contact</a></div>
       </div>
 
-      <a href="#demande" class="nav-cta">Faire une demande</a>
+      <a href="#demande" class="nav-cta" data-i18n="nav_cta">Faire une demande</a>
+
+      <!-- Language Switcher -->
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">
+          <span id="currentLangFlag">🇫🇷</span>
+          <span id="currentLangCode">FR</span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <div class="lang-option" onclick="setLang('fr')">🇫🇷 Français</div>
+          <div class="lang-option" onclick="setLang('de')">🇩🇪 Deutsch</div>
+          <div class="lang-option" onclick="setLang('pl')">🇵🇱 Polski</div>
+          <div class="lang-option" onclick="setLang('sv')">🇸🇪 Svenska</div>
+        </div>
+      </div>
 
       <button class="mobile-menu-btn" id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false">
         <span class="bar"></span>
@@ -1428,9 +1488,9 @@
     <div class="hero-overlay"></div>
     <div class="hero-grid-pattern"></div>
     <div class="hero-content">
-      <div class="hero-badge">Financement flexible pour vos projets</div>
-      <h1 class="hero-title">Le financement qui <span>vous correspond</span></h1>
-      <p class="hero-desc">Que ce soit pour vos projets personnels ou vos investissements professionnels — nous vous aidons à trouver le financement adapté. Réponse sous 24h, 100% digital, taux compétitifs.</p>
+      <div class="hero-badge" data-i18n="hero_badge">Financement flexible pour vos projets</div>
+      <h1 class="hero-title" data-i18n="hero_title">Le financement qui <span>vous correspond</span></h1>
+      <p class="hero-desc" data-i18n="hero_desc">Que ce soit pour vos projets personnels ou vos investissements professionnels — nous vous aidons à trouver le financement adapté. Réponse sous 24h, 100% digital, taux compétitifs.</p>
       <div class="hero-ctas">
         <a href="#demande" class="btn btn-primary">Faire une demande</a>
         <a href="#particuliers" class="btn btn-secondary">Découvrir nos offres</a>
@@ -1438,19 +1498,19 @@
       <div class="hero-trust">
         <div class="trust-item">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-          <span>Préapprobation immédiate</span>
+          <span data-i18n="trust1">Préapprobation immédiate</span>
         </div>
         <div class="trust-item">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-          <span>Réponse en 24h</span>
+          <span data-i18n="trust2">Réponse en 24h</span>
         </div>
         <div class="trust-item">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>
-          <span>100% Sécurisé</span>
+          <span data-i18n="trust3">100% Sécurisé</span>
         </div>
         <div class="trust-item">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-          <span>Fonds sous 48h</span>
+          <span data-i18n="trust4">Fonds sous 48h</span>
         </div>
       </div>
     </div>
@@ -1460,8 +1520,8 @@
   <section class="features" id="prets">
     <div class="container">
       <div class="section-header">
-        <div class="section-eyebrow">Pourquoi nous choisir ?</div>
-        <h2 class="section-title">Une expérience pensée pour vous</h2>
+        <div class="section-eyebrow" data-i18n="feat_eyebrow">Pourquoi nous choisir ?</div>
+        <h2 class="section-title" data-i18n="feat_title">Une expérience pensée pour vous</h2>
         <p class="section-body">Des solutions de financement modernes, transparentes et adaptées à chaque projet de vie ou d'entreprise.</p>
       </div>
       <div class="features-grid">
@@ -1506,8 +1566,8 @@
           <div class="about-image-accent"></div>
         </div>
         <div class="about-content">
-          <span class="about-label">À Propos</span>
-          <h2 class="about-title">Nous réinventons les règles de la banque traditionnelle</h2>
+          <span class="about-label" data-i18n="about_eyebrow">À Propos</span>
+          <h2 class="about-title" data-i18n="about_title">Nous réinventons les règles de la banque traditionnelle</h2>
           <p class="about-text">SINBA est un établissement européen de crédit en ligne qui place le succès de ses clients au cœur de sa mission. Nous combinons technologie de pointe et approche humaine pour vous offrir des solutions de financement transparentes, rapides et adaptées à chaque situation — que vous soyez particulier ou professionnel.</p>
           <div class="about-stats">
             <div class="stat-item">
@@ -1533,8 +1593,8 @@
   <section class="particuliers" id="particuliers">
     <div class="container">
       <div class="section-header">
-        <div class="section-eyebrow">Crédits Particuliers</div>
-        <h2 class="section-title">Financement pour vos projets personnels</h2>
+        <div class="section-eyebrow" data-i18n="part_eyebrow">Crédits Particuliers</div>
+        <h2 class="section-title" data-i18n="part_title">Financement pour vos projets personnels</h2>
         <p class="section-body">Avec nos solutions flexibles, financez vos projets personnels simplement et en toute sécurité — de manière transparente, rapide et sur mesure.</p>
       </div>
       <div class="credit-grid">
@@ -1594,8 +1654,8 @@
   <section class="entreprises" id="entreprises">
     <div class="container">
       <div class="section-header" style="position:relative;z-index:2;">
-        <div class="section-eyebrow">Crédits Entreprises</div>
-        <h2 class="section-title">Solutions de financement sur mesure pour les professionnels</h2>
+        <div class="section-eyebrow" data-i18n="ent_eyebrow">Crédits Entreprises</div>
+        <h2 class="section-title" data-i18n="ent_title">Solutions de financement sur mesure pour les professionnels</h2>
         <p class="section-body">De la création à l'expansion, nous vous accompagnons avec des solutions flexibles pour offrir stabilité et croissance à votre entreprise.</p>
       </div>
       <div class="entreprises-grid">
@@ -1643,8 +1703,8 @@
   <section class="conditions" id="conditions">
     <div class="container">
       <div class="section-header">
-        <div class="section-eyebrow">Nos Conditions</div>
-        <h2 class="section-title">Comment fonctionne notre financement</h2>
+        <div class="section-eyebrow" data-i18n="cond_eyebrow">Nos Conditions</div>
+        <h2 class="section-title" data-i18n="cond_title">Comment fonctionne notre financement</h2>
         <p class="section-body">Des conditions simples et transparentes pour obtenir votre crédit rapidement et sereinement.</p>
       </div>
       <div class="conditions-grid">
@@ -1700,25 +1760,25 @@
   <section class="steps">
     <div class="container">
       <div class="section-header">
-        <div class="section-eyebrow">Processus</div>
-        <h2 class="section-title">Comment ça marche</h2>
+        <div class="section-eyebrow" data-i18n="steps_eyebrow">Processus</div>
+        <h2 class="section-title" data-i18n="steps_title">Comment ça marche</h2>
         <p class="section-body">Trois étapes simples pour obtenir votre financement, de la demande jusqu'à la signature.</p>
       </div>
       <div class="steps-track" style="position:relative;">
         <div class="steps-connector"></div>
         <div class="step-item">
           <div class="step-circle">1</div>
-          <h3 class="step-title">Remplir le formulaire</h3>
+          <h3 class="step-title" data-i18n="step1_title">Remplir le formulaire</h3>
           <p class="step-desc">Complétez votre demande en ligne en quelques minutes. 100% numérique, sans papier ni déplacement.</p>
         </div>
         <div class="step-item">
           <div class="step-circle">2</div>
-          <h3 class="step-title">Traitement de la demande</h3>
+          <h3 class="step-title" data-i18n="step2_title">Traitement de la demande</h3>
           <p class="step-desc">Notre équipe analyse votre dossier et vous transmet une réponse de principe sous 24 heures maximum.</p>
         </div>
         <div class="step-item">
           <div class="step-circle">3</div>
-          <h3 class="step-title">Signature & déblocage</h3>
+          <h3 class="step-title" data-i18n="step3_title">Signature & déblocage</h3>
           <p class="step-desc">Signez électroniquement en toute sécurité et recevez vos fonds directement sur votre compte sous 48h.</p>
         </div>
       </div>
@@ -1729,8 +1789,8 @@
   <section class="temoignages">
     <div class="container">
       <div class="section-header">
-        <div class="section-eyebrow">Témoignages</div>
-        <h2 class="section-title">Clients satisfaits</h2>
+        <div class="section-eyebrow" data-i18n="temo_eyebrow">Témoignages</div>
+        <h2 class="section-title" data-i18n="temo_title">Clients satisfaits</h2>
         <p class="section-body">Des particuliers et professionnels qui nous font confiance pour financer leurs projets.</p>
       </div>
       <div class="temoignages-grid">
@@ -1793,8 +1853,8 @@
   <section class="faq">
     <div class="container">
       <div class="section-header">
-        <div class="section-eyebrow">FAQ</div>
-        <h2 class="section-title">Questions fréquentes</h2>
+        <div class="section-eyebrow" data-i18n="faq_eyebrow">FAQ</div>
+        <h2 class="section-title" data-i18n="faq_title">Questions fréquentes</h2>
         <p class="section-body">Tout ce que vous devez savoir avant de souscrire votre crédit chez SINBA.</p>
       </div>
       <div class="faq-container">
@@ -1852,14 +1912,14 @@
   <section id="demande" style="padding:120px 0;background:var(--off-white);">
     <div class="container">
       <div class="section-header">
-        <div class="section-eyebrow">Demande de Crédit</div>
-        <h2 class="section-title">Faites votre demande en ligne</h2>
+        <div class="section-eyebrow" data-i18n="form_eyebrow">Demande de Crédit</div>
+        <h2 class="section-title" data-i18n="form_title">Faites votre demande en ligne</h2>
         <p class="section-body">Remplissez le formulaire ci-dessous. Nous analyserons votre dossier et vous répondrons sous 24h.</p>
       </div>
 
       <!-- Étape 1 : Choix du type de crédit -->
       <div id="step1" class="form-step active-step">
-        <h3 style="font-family:'Sora',sans-serif;font-size:1.25rem;color:var(--navy-900);text-align:center;margin-bottom:32px;">Quel type de financement souhaitez-vous ?</h3>
+        <h3 style="font-family:'Sora',sans-serif;font-size:1.25rem;color:var(--navy-900);text-align:center;margin-bottom:32px;" data-i18n="form_choose">Quel type de financement souhaitez-vous ?</h3>
         <div class="credit-type-grid">
           <!-- Particuliers -->
           <div class="credit-type-group">
@@ -2056,7 +2116,7 @@
       <!-- Étape 3 : Confirmation -->
       <div id="step3" class="form-step" style="display:none;text-align:center;padding:60px 0;">
         <div style="width:80px;height:80px;background:rgba(212,175,55,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:2.5rem;">✅</div>
-        <h3 style="font-family:'Sora',sans-serif;font-size:1.75rem;color:var(--navy-900);margin-bottom:16px;">Demande envoyée avec succès !</h3>
+        <h3 style="font-family:'Sora',sans-serif;font-size:1.75rem;color:var(--navy-900);margin-bottom:16px;" data-i18n="form_success_title">Demande envoyée avec succès !</h3>
         <p style="color:var(--navy-600);font-size:1.0625rem;max-width:500px;margin:0 auto 36px;line-height:1.7;">Notre équipe analyse votre dossier et vous contactera dans les <strong>24 heures</strong> à l'adresse email fournie.</p>
         <button onclick="resetForm()" class="btn-outline-gold">Faire une autre demande</button>
       </div>
@@ -2122,6 +2182,247 @@
   </footer>
 
   <script>
+
+  <script>
+    // ===== EMAILJS INIT =====
+    emailjs.init('0UOhXC-BGUcObbg7c');
+
+    // ===== TRANSLATIONS =====
+    const translations = {
+      fr: {
+        lang_flag: '🇫🇷', lang_code: 'FR',
+        nav_home: 'Accueil', nav_particuliers: 'Particuliers', nav_entreprises: 'Entreprises',
+        nav_conditions: 'Nos Conditions', nav_contact: 'Contact', nav_cta: 'Faire une demande',
+        hero_badge: 'Financement flexible pour vos projets',
+        hero_title: 'Le financement qui <span>vous correspond</span>',
+        hero_desc: "Que ce soit pour vos projets personnels ou vos investissements professionnels — nous vous aidons à trouver le financement adapté. Réponse sous 24h, 100% digital, taux compétitifs.",
+        hero_btn1: 'Faire une demande', hero_btn2: 'Découvrir nos offres',
+        trust1: 'Préapprobation immédiate', trust2: 'Réponse en 24h', trust3: '100% Sécurisé', trust4: 'Fonds sous 48h',
+        feat_eyebrow: 'Pourquoi nous choisir ?', feat_title: 'Une expérience pensée pour vous',
+        feat_desc: 'Des solutions de financement modernes, transparentes et adaptées à chaque projet de vie ou d\'entreprise.',
+        about_eyebrow: 'À Propos', about_title: 'Nous réinventons les règles de la banque traditionnelle',
+        about_text: "SINBA est un établissement européen de crédit en ligne qui place le succès de ses clients au cœur de sa mission. Nous combinons technologie de pointe et approche humaine pour vous offrir des solutions de financement transparentes, rapides et adaptées.",
+        about_btn: 'Faire une demande →',
+        part_eyebrow: 'Crédits Particuliers', part_title: 'Financement pour vos projets personnels',
+        part_desc: 'Avec nos solutions flexibles, financez vos projets personnels simplement et en toute sécurité.',
+        ent_eyebrow: 'Crédits Entreprises', ent_title: 'Solutions de financement sur mesure pour les professionnels',
+        ent_desc: 'De la création à l\'expansion, nous vous accompagnons avec des solutions flexibles.',
+        cond_eyebrow: 'Nos Conditions', cond_title: 'Comment fonctionne notre financement',
+        cond_desc: 'Des conditions simples et transparentes pour obtenir votre crédit rapidement.',
+        steps_eyebrow: 'Processus', steps_title: 'Comment ça marche',
+        steps_desc: 'Trois étapes simples pour obtenir votre financement.',
+        step1_title: 'Remplir le formulaire', step1_desc: 'Complétez votre demande en ligne en quelques minutes.',
+        step2_title: 'Traitement de la demande', step2_desc: 'Notre équipe analyse votre dossier et vous répond sous 24h.',
+        step3_title: 'Signature & déblocage', step3_desc: 'Signez électroniquement et recevez vos fonds sous 48h.',
+        temo_eyebrow: 'Témoignages', temo_title: 'Clients satisfaits',
+        faq_eyebrow: 'FAQ', faq_title: 'Questions fréquentes',
+        form_eyebrow: 'Demande de Crédit', form_title: 'Faites votre demande en ligne',
+        form_desc: 'Remplissez le formulaire ci-dessous. Nous analyserons votre dossier et vous répondrons sous 24h.',
+        form_choose: 'Quel type de financement souhaitez-vous ?',
+        form_send: 'Envoyer ma demande', form_sending: 'Envoi en cours...',
+        form_success_title: 'Demande envoyée avec succès !',
+        form_success_desc: 'Notre équipe analyse votre dossier et vous contactera dans les <strong>24 heures</strong>.',
+        form_another: 'Faire une autre demande',
+        footer_about: 'Nous réinventons les règles de la banque traditionnelle. Notre succès est indissociable de celui de nos clients.',
+        footer_nav: 'Navigation', footer_particuliers: 'Particuliers', footer_contact_title: 'Contact',
+      },
+      de: {
+        lang_flag: '🇩🇪', lang_code: 'DE',
+        nav_home: 'Startseite', nav_particuliers: 'Privatpersonen', nav_entreprises: 'Unternehmen',
+        nav_conditions: 'Unsere Konditionen', nav_contact: 'Kontakt', nav_cta: 'Antrag stellen',
+        hero_badge: 'Flexible Finanzierung für Ihre Projekte',
+        hero_title: 'Die Finanzierung, die <span>zu Ihnen passt</span>',
+        hero_desc: "Ob persönliche Projekte oder Unternehmensinvestitionen — wir helfen Ihnen, die passende Finanzierung zu finden. Antwort in 24h, 100% digital, wettbewerbsfähige Zinsen.",
+        hero_btn1: 'Antrag stellen', hero_btn2: 'Angebote entdecken',
+        trust1: 'Sofortige Vorabgenehmigung', trust2: 'Antwort in 24h', trust3: '100% Sicher', trust4: 'Mittel in 48h',
+        feat_eyebrow: 'Warum uns wählen?', feat_title: 'Eine Erfahrung, die für Sie gedacht ist',
+        feat_desc: 'Moderne, transparente Finanzierungslösungen für jeden Lebens- oder Unternehmensplan.',
+        about_eyebrow: 'Über uns', about_title: 'Wir erfinden die Regeln des traditionellen Bankwesens neu',
+        about_text: "SINBA ist eine europäische Online-Kreditinstitution, die den Erfolg ihrer Kunden in den Mittelpunkt stellt. Wir kombinieren modernste Technologie mit einem menschlichen Ansatz.",
+        about_btn: 'Antrag stellen →',
+        part_eyebrow: 'Privatkredite', part_title: 'Finanzierung für Ihre persönlichen Projekte',
+        part_desc: 'Mit unseren flexiblen Lösungen finanzieren Sie Ihre persönlichen Projekte einfach und sicher.',
+        ent_eyebrow: 'Unternehmenskredite', ent_title: 'Maßgeschneiderte Finanzierungslösungen für Profis',
+        ent_desc: 'Von der Gründung bis zur Expansion begleiten wir Sie mit flexiblen Lösungen.',
+        cond_eyebrow: 'Unsere Konditionen', cond_title: 'Wie unsere Finanzierung funktioniert',
+        cond_desc: 'Einfache und transparente Bedingungen für Ihren Kredit.',
+        steps_eyebrow: 'Prozess', steps_title: 'So funktioniert es',
+        steps_desc: 'Drei einfache Schritte zur Finanzierung.',
+        step1_title: 'Formular ausfüllen', step1_desc: 'Stellen Sie Ihren Antrag online in wenigen Minuten.',
+        step2_title: 'Antragsbearbeitung', step2_desc: 'Unser Team prüft Ihre Unterlagen und antwortet in 24h.',
+        step3_title: 'Unterschrift & Auszahlung', step3_desc: 'Unterschreiben Sie elektronisch und erhalten Sie Ihr Geld in 48h.',
+        temo_eyebrow: 'Referenzen', temo_title: 'Zufriedene Kunden',
+        faq_eyebrow: 'FAQ', faq_title: 'Häufige Fragen',
+        form_eyebrow: 'Kreditantrag', form_title: 'Stellen Sie Ihren Antrag online',
+        form_desc: 'Füllen Sie das Formular aus. Wir prüfen Ihren Antrag und antworten innerhalb von 24h.',
+        form_choose: 'Welche Art von Finanzierung möchten Sie?',
+        form_send: 'Antrag absenden', form_sending: 'Wird gesendet...',
+        form_success_title: 'Antrag erfolgreich gesendet!',
+        form_success_desc: 'Unser Team prüft Ihren Antrag und wird Sie innerhalb von <strong>24 Stunden</strong> kontaktieren.',
+        form_another: 'Weiteren Antrag stellen',
+        footer_about: 'Wir erfinden die Regeln des traditionellen Bankwesens neu. Unser Erfolg ist untrennbar mit dem unserer Kunden verbunden.',
+        footer_nav: 'Navigation', footer_particuliers: 'Privatpersonen', footer_contact_title: 'Kontakt',
+      },
+      pl: {
+        lang_flag: '🇵🇱', lang_code: 'PL',
+        nav_home: 'Strona główna', nav_particuliers: 'Osoby prywatne', nav_entreprises: 'Firmy',
+        nav_conditions: 'Nasze warunki', nav_contact: 'Kontakt', nav_cta: 'Złóż wniosek',
+        hero_badge: 'Elastyczne finansowanie dla Twoich projektów',
+        hero_title: 'Finansowanie, które <span>pasuje do Ciebie</span>',
+        hero_desc: "Czy to projekty osobiste, czy inwestycje biznesowe — pomagamy znaleźć odpowiednie finansowanie. Odpowiedź w 24h, 100% cyfrowe, konkurencyjne oprocentowanie.",
+        hero_btn1: 'Złóż wniosek', hero_btn2: 'Odkryj nasze oferty',
+        trust1: 'Natychmiastowa wstępna akceptacja', trust2: 'Odpowiedź w 24h', trust3: '100% Bezpieczne', trust4: 'Środki w 48h',
+        feat_eyebrow: 'Dlaczego my?', feat_title: 'Doświadczenie stworzone dla Ciebie',
+        feat_desc: 'Nowoczesne, przejrzyste rozwiązania finansowe dopasowane do każdego projektu.',
+        about_eyebrow: 'O nas', about_title: 'Zmieniamy zasady tradycyjnej bankowości',
+        about_text: "SINBA to europejska instytucja kredytowa online, która stawia sukces swoich klientów w centrum misji. Łączymy najnowocześniejszą technologię z ludzkim podejściem.",
+        about_btn: 'Złóż wniosek →',
+        part_eyebrow: 'Kredyty dla osób prywatnych', part_title: 'Finansowanie Twoich osobistych projektów',
+        part_desc: 'Dzięki naszym elastycznym rozwiązaniom sfinansuj swoje projekty prosto i bezpiecznie.',
+        ent_eyebrow: 'Kredyty dla firm', ent_title: 'Rozwiązania finansowe szyte na miarę dla profesjonalistów',
+        ent_desc: 'Od założenia po ekspansję — towarzyszymy Ci z elastycznymi rozwiązaniami.',
+        cond_eyebrow: 'Nasze warunki', cond_title: 'Jak działa nasze finansowanie',
+        cond_desc: 'Proste i przejrzyste warunki uzyskania kredytu.',
+        steps_eyebrow: 'Proces', steps_title: 'Jak to działa',
+        steps_desc: 'Trzy proste kroki do uzyskania finansowania.',
+        step1_title: 'Wypełnij formularz', step1_desc: 'Złóż wniosek online w kilka minut.',
+        step2_title: 'Rozpatrzenie wniosku', step2_desc: 'Nasz zespół analizuje Twój wniosek i odpowiada w 24h.',
+        step3_title: 'Podpisanie & wypłata', step3_desc: 'Podpisz elektronicznie i otrzymaj środki w 48h.',
+        temo_eyebrow: 'Opinie', temo_title: 'Zadowoleni klienci',
+        faq_eyebrow: 'FAQ', faq_title: 'Często zadawane pytania',
+        form_eyebrow: 'Wniosek kredytowy', form_title: 'Złóż wniosek online',
+        form_desc: 'Wypełnij formularz poniżej. Przeanalizujemy Twój wniosek i odpowiemy w ciągu 24h.',
+        form_choose: 'Jaki rodzaj finansowania Cię interesuje?',
+        form_send: 'Wyślij wniosek', form_sending: 'Wysyłanie...',
+        form_success_title: 'Wniosek wysłany pomyślnie!',
+        form_success_desc: 'Nasz zespół przeanalizuje Twój wniosek i skontaktuje się w ciągu <strong>24 godzin</strong>.',
+        form_another: 'Złóż kolejny wniosek',
+        footer_about: 'Zmieniamy zasady tradycyjnej bankowości. Nasz sukces jest nierozerwalnie związany z sukcesem naszych klientów.',
+        footer_nav: 'Nawigacja', footer_particuliers: 'Osoby prywatne', footer_contact_title: 'Kontakt',
+      },
+      sv: {
+        lang_flag: '🇸🇪', lang_code: 'SV',
+        nav_home: 'Hem', nav_particuliers: 'Privatpersoner', nav_entreprises: 'Företag',
+        nav_conditions: 'Våra villkor', nav_contact: 'Kontakt', nav_cta: 'Ansök nu',
+        hero_badge: 'Flexibel finansiering för dina projekt',
+        hero_title: 'Finansiering som <span>passar dig</span>',
+        hero_desc: "Oavsett om det gäller personliga projekt eller företagsinvesteringar — vi hjälper dig hitta rätt finansiering. Svar inom 24h, 100% digitalt, konkurrenskraftiga räntor.",
+        hero_btn1: 'Ansök nu', hero_btn2: 'Upptäck våra erbjudanden',
+        trust1: 'Omedelbart förhandsgodkännande', trust2: 'Svar inom 24h', trust3: '100% Säkert', trust4: 'Medel inom 48h',
+        feat_eyebrow: 'Varför välja oss?', feat_title: 'En upplevelse skapad för dig',
+        feat_desc: 'Moderna, transparenta finansieringslösningar anpassade för varje projekt.',
+        about_eyebrow: 'Om oss', about_title: 'Vi uppfinner reglerna för traditionell bankverksamhet på nytt',
+        about_text: "SINBA är en europeisk onlinekreditinstitution som sätter sina kunders framgång i centrum. Vi kombinerar toppmodern teknik med ett mänskligt tillvägagångssätt.",
+        about_btn: 'Ansök nu →',
+        part_eyebrow: 'Privatlån', part_title: 'Finansiering för dina personliga projekt',
+        part_desc: 'Med våra flexibla lösningar finansierar du dina personliga projekt enkelt och säkert.',
+        ent_eyebrow: 'Företagslån', ent_title: 'Skräddarsydda finansieringslösningar för proffs',
+        ent_desc: 'Från start till expansion — vi följer dig med flexibla lösningar.',
+        cond_eyebrow: 'Våra villkor', cond_title: 'Hur vår finansiering fungerar',
+        cond_desc: 'Enkla och transparenta villkor för ditt lån.',
+        steps_eyebrow: 'Process', steps_title: 'Hur det fungerar',
+        steps_desc: 'Tre enkla steg för att få din finansiering.',
+        step1_title: 'Fyll i formuläret', step1_desc: 'Skicka in din ansökan online på några minuter.',
+        step2_title: 'Handläggning', step2_desc: 'Vårt team granskar din ansökan och svarar inom 24h.',
+        step3_title: 'Signering & utbetalning', step3_desc: 'Signera elektroniskt och få dina medel inom 48h.',
+        temo_eyebrow: 'Omdömen', temo_title: 'Nöjda kunder',
+        faq_eyebrow: 'FAQ', faq_title: 'Vanliga frågor',
+        form_eyebrow: 'Låneansökan', form_title: 'Ansök online',
+        form_desc: 'Fyll i formuläret nedan. Vi granskar din ansökan och svarar inom 24h.',
+        form_choose: 'Vilken typ av finansiering söker du?',
+        form_send: 'Skicka ansökan', form_sending: 'Skickar...',
+        form_success_title: 'Ansökan skickad!',
+        form_success_desc: 'Vårt team granskar din ansökan och kontaktar dig inom <strong>24 timmar</strong>.',
+        form_another: 'Skicka en ny ansökan',
+        footer_about: 'Vi uppfinner reglerna för traditionell bankverksamhet på nytt. Vår framgång är oupplösligt kopplad till våra kunders framgång.',
+        footer_nav: 'Navigation', footer_particuliers: 'Privatpersoner', footer_contact_title: 'Kontakt',
+      }
+    };
+
+    let currentLang = 'fr';
+
+    const i18nMap = {
+      nav_home: '[data-i18n="nav_home"]',
+      nav_cta: '[data-i18n="nav_cta"]',
+      hero_badge: '[data-i18n="hero_badge"]',
+      hero_title: '[data-i18n="hero_title"]',
+      hero_desc: '[data-i18n="hero_desc"]',
+      hero_btn1: '[data-i18n="hero_btn1"]',
+      hero_btn2: '[data-i18n="hero_btn2"]',
+      trust1: '[data-i18n="trust1"]',
+      trust2: '[data-i18n="trust2"]',
+      trust3: '[data-i18n="trust3"]',
+      trust4: '[data-i18n="trust4"]',
+      feat_eyebrow: '[data-i18n="feat_eyebrow"]',
+      feat_title: '[data-i18n="feat_title"]',
+      feat_desc: '[data-i18n="feat_desc"]',
+      about_eyebrow: '[data-i18n="about_eyebrow"]',
+      about_title: '[data-i18n="about_title"]',
+      about_text: '[data-i18n="about_text"]',
+      about_btn: '[data-i18n="about_btn"]',
+      part_eyebrow: '[data-i18n="part_eyebrow"]',
+      part_title: '[data-i18n="part_title"]',
+      part_desc: '[data-i18n="part_desc"]',
+      ent_eyebrow: '[data-i18n="ent_eyebrow"]',
+      ent_title: '[data-i18n="ent_title"]',
+      ent_desc: '[data-i18n="ent_desc"]',
+      cond_eyebrow: '[data-i18n="cond_eyebrow"]',
+      cond_title: '[data-i18n="cond_title"]',
+      cond_desc: '[data-i18n="cond_desc"]',
+      steps_eyebrow: '[data-i18n="steps_eyebrow"]',
+      steps_title: '[data-i18n="steps_title"]',
+      steps_desc: '[data-i18n="steps_desc"]',
+      step1_title: '[data-i18n="step1_title"]',
+      step1_desc: '[data-i18n="step1_desc"]',
+      step2_title: '[data-i18n="step2_title"]',
+      step2_desc: '[data-i18n="step2_desc"]',
+      step3_title: '[data-i18n="step3_title"]',
+      step3_desc: '[data-i18n="step3_desc"]',
+      temo_eyebrow: '[data-i18n="temo_eyebrow"]',
+      temo_title: '[data-i18n="temo_title"]',
+      faq_eyebrow: '[data-i18n="faq_eyebrow"]',
+      faq_title: '[data-i18n="faq_title"]',
+      form_eyebrow: '[data-i18n="form_eyebrow"]',
+      form_title: '[data-i18n="form_title"]',
+      form_desc: '[data-i18n="form_desc"]',
+      form_choose: '[data-i18n="form_choose"]',
+      form_send: '[data-i18n="form_send"]',
+      form_success_title: '[data-i18n="form_success_title"]',
+      form_success_desc: '[data-i18n="form_success_desc"]',
+      form_another: '[data-i18n="form_another"]',
+      footer_about: '[data-i18n="footer_about"]',
+      footer_nav: '[data-i18n="footer_nav"]',
+      footer_particuliers: '[data-i18n="footer_particuliers"]',
+      footer_contact_title: '[data-i18n="footer_contact_title"]',
+    };
+
+    function setLang(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+      document.getElementById('currentLangFlag').textContent = t.lang_flag;
+      document.getElementById('currentLangCode').textContent = t.lang_code;
+      document.getElementById('langMenu').classList.remove('open');
+      document.documentElement.lang = lang;
+      Object.keys(i18nMap).forEach(key => {
+        if (!t[key]) return;
+        document.querySelectorAll(i18nMap[key]).forEach(el => {
+          el.innerHTML = t[key];
+        });
+      });
+      // Update send button text
+      const sendBtn = document.querySelector('#creditForm button[type="submit"]');
+      if (sendBtn) sendBtn.innerHTML = t.form_send + ' <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>';
+    }
+
+    function toggleLangMenu() {
+      document.getElementById('langMenu').classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#langSwitcher')) {
+        document.getElementById('langMenu').classList.remove('open');
+      }
+    });
+
     // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
@@ -3326,28 +3627,43 @@
       }
     });
 
-    // Formspree AJAX submit
+    // Formspree AJAX submit — REMPLACÉ PAR EMAILJS
     document.getElementById('creditForm').addEventListener('submit', async function(e) {
       e.preventDefault();
+      const t = translations[currentLang];
       const btn = this.querySelector('button[type="submit"]');
-      btn.textContent = 'Envoi en cours...';
+      btn.textContent = t.form_sending || 'Envoi...';
       btn.disabled = true;
-      try {
-        const res = await fetch(this.action, {
-          method: 'POST',
-          body: new FormData(this),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          document.getElementById('step2').style.display = 'none';
-          document.getElementById('step3').style.display = 'block';
-          window.scrollTo({ top: document.getElementById('demande').offsetTop - 100, behavior: 'smooth' });
+
+      // Collect all form fields into a message string
+      const formData = new FormData(this);
+      let msgLines = [];
+      for (let [key, val] of formData.entries()) {
+        if (key.startsWith('_') || !val || val === '') continue;
+        if (val instanceof File) {
+          if (val.name) msgLines.push(`${key}: [Fichier joint: ${val.name}]`);
         } else {
-          btn.textContent = 'Erreur, réessayez';
-          btn.disabled = false;
+          msgLines.push(`${key.replace(/_/g,' ')}: ${val}`);
         }
-      } catch {
-        btn.textContent = 'Erreur réseau, réessayez';
+      }
+
+      const params = {
+        to_email: 'manola122345@gmail.com',
+        subject: formData.get('_subject') || 'Nouvelle demande SINBA',
+        message: msgLines.join('\n'),
+        from_name: (formData.get('prenom') || '') + ' ' + (formData.get('nom') || ''),
+        reply_to: formData.get('email') || '',
+        credit_type: formData.get('type_de_credit') || '',
+      };
+
+      try {
+        await emailjs.send('service_qis34gh', 'template_ne11s9q', params);
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('step3').style.display = 'block';
+        window.scrollTo({ top: document.getElementById('demande').offsetTop - 100, behavior: 'smooth' });
+      } catch(err) {
+        console.error('EmailJS error:', err);
+        btn.innerHTML = '❌ Erreur — réessayez';
         btn.disabled = false;
       }
     });
